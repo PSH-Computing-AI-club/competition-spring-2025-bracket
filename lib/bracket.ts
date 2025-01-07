@@ -143,8 +143,15 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
             matches.push(match);
 
-            if (match.winner === competitorA) aWins++;
-            else if (match.winner === competitorB) bWins++;
+            switch (match.winner) {
+                case competitorA:
+                    aWins++;
+                    break;
+
+                case competitorB:
+                    bWins++;
+                    break;
+            }
 
             matchIndex++;
         }
