@@ -211,9 +211,8 @@ export function makeBracket(options: IBracketOptions): IBracket {
             const rounds: IBracketRound[] = [];
 
             let currentRoundCompetitors = shuffle(competitors, { prng });
-            let roundIndex = 0;
 
-            while (currentRoundCompetitors.length > 1) {
+            for (let roundIndex = 0; roundIndex < maxRounds; roundIndex++) {
                 const currentRound = await computeRound(
                     currentRoundCompetitors,
                     roundIndex,
@@ -229,8 +228,6 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
                         return winner;
                     });
-
-                roundIndex++;
             }
 
             return {
