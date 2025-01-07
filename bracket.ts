@@ -1,7 +1,8 @@
-import { randomSeeded, shuffle } from '@std/random';
+import { randomIntegerBetween, randomSeeded, shuffle } from '@std/random';
 
+import type { ICompetitor } from './competitor.ts';
+import { simulateCompetitors } from './competitor.ts';
 import { pairElements } from './util.ts';
-import { ICompetitor } from './competitor.ts';
 
 export interface IBracketMatch {
     readonly matchIndex: number;
@@ -58,7 +59,13 @@ export function makeBracket(options: IBracketOptions): IBracket {
         competitorB: ICompetitor,
         matchIndex: number,
     ): Promise<IBracketMatch> {
-        // **TODO:** compute match
+        const simulationSeed = randomIntegerBetween(0, Number.MAX_SAFE_INTEGER);
+
+        const winner = await simulateCompetitors(
+            { seed: simulationSeed },
+            competitorA,
+            competitorB,
+        );
 
         return { matchIndex, winner };
     }
