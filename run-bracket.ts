@@ -2,6 +2,7 @@ import { join } from '@std/path';
 import { randomSeeded, shuffle } from '@std/random';
 
 import { exec } from './util.ts';
+import type { ICompetitor } from './types.ts';
 
 import COMPETITORS_MANIFEST from './competitors.json' with { type: 'json' };
 
@@ -48,7 +49,7 @@ let COMPETITORS = await Promise.all(
             repository: repositoryURL,
         };
     }),
-);
+) satisfies ICompetitor[];
 
 COMPETITORS = shuffle(COMPETITORS, { prng: NUMBER_GENERATOR });
 
