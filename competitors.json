@@ -1,0 +1,41 @@
+[
+    {
+        "name": "test-player-1",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "test-player-2",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "test-player-3",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "test-player-4",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "test-player-5",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "test-player-6",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "test-player-7",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "test-player-8",
+        "repository": "https://github.com/.../..."
+    }
+]
