@@ -1,8 +1,8 @@
 import { join } from '@std/path';
 import { randomSeeded, shuffle } from '@std/random';
 
+import type { ICompetitor } from './bracket.ts';
 import { exec } from './util.ts';
-import type { ICompetitor } from './types.ts';
 
 import COMPETITORS_MANIFEST from './competitors.json' with { type: 'json' };
 

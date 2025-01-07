@@ -43,3 +43,16 @@ export async function exec(
 
     return textDecoder.decode(stdout);
 }
+
+export function pairElements<T>(array: T[]): T[][] {
+    const pairs: T[][] = [];
+
+    for (let elementIndex = 0; elementIndex < array.length; elementIndex += 2) {
+        pairs.push([
+            array[elementIndex],
+            array[elementIndex + 1],
+        ]);
+    }
+
+    return pairs;
+}
