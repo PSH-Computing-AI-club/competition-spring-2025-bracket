@@ -50,7 +50,7 @@ export interface IBracketOptions {
     readonly suddenDeathMax: number;
 }
 
-export interface IBracket {
+export interface IBracket extends IBracketOptions {
     computeBracket(): Promise<IBracketResults>;
 }
 
@@ -215,6 +215,11 @@ export function makeBracket(options: IBracketOptions): IBracket {
     }
 
     return {
+        competitors,
+        matchesBestOf,
+        seed,
+        suddenDeathMax,
+
         async computeBracket() {
             const rounds: IBracketRound[] = [];
 
