@@ -5,7 +5,13 @@ import { simulateCompetitors } from './competitor.ts';
 import { pairElements } from './util.ts';
 
 export interface IBracketMatch {
+    readonly gridColumns: number;
+
+    readonly gridRows: number;
+
     readonly matchIndex: number;
+
+    readonly seed: number;
 
     readonly winner: ICompetitor | null;
 }
@@ -108,7 +114,13 @@ export function makeBracket(options: IBracketOptions): IBracket {
             competitorB,
         );
 
-        return { matchIndex, winner };
+        return {
+            gridColumns,
+            gridRows,
+            matchIndex,
+            seed: simulationSeed,
+            winner,
+        };
     }
 
     async function computePair(
