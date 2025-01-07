@@ -85,8 +85,8 @@ export function makeBracket(options: IBracketOptions): IBracket {
     const prng = randomSeeded(seed);
 
     async function computeMatch(
-        competitorA: ICompetitor,
-        competitorB: ICompetitor,
+        firstCompetitor: ICompetitor,
+        secondCompetitor: ICompetitor,
         roundIndex: number,
         matchIndex: number,
     ): Promise<IBracketMatch> {
@@ -103,8 +103,8 @@ export function makeBracket(options: IBracketOptions): IBracket {
                 gridRows,
                 seed: simulationSeed,
             },
-            competitorA,
-            competitorB,
+            firstCompetitor,
+            secondCompetitor,
         );
 
         return {
@@ -129,14 +129,18 @@ export function makeBracket(options: IBracketOptions): IBracket {
         let aWins = 0;
         let bWins = 0;
 
+        let competitors = shuffle([competitorA, competitorB], { prng });
+
         while (
             matchIndex < matchesBestOf &&
             aWins < matchesWinCount &&
             bWins < matchesWinCount
         ) {
+            const [firstCompetitor, secondCompetitor] = competitors;
+
             const match = await computeMatch(
-                competitorA,
-                competitorB,
+                firstCompetitor,
+                secondCompetitor,
                 roundIndex,
                 matchIndex,
             );
@@ -145,10 +149,14 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
             switch (match.winner) {
                 case competitorA:
+                    competitors = [competitorB, competitorA];
+
                     aWins++;
                     break;
 
                 case competitorB:
+                    competitors = [competitorA, competitorB];
+
                     bWins++;
                     break;
             }
