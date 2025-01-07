@@ -1,18 +1,7 @@
+import { randomSeeded, shuffle } from '@std/random';
+
 import { pairElements } from './util.ts';
-
-const MATCHES_BEST_OF = 5;
-
-const MATCHES_WIN_COUNT = Math.ceil(MATCHES_BEST_OF / 2);
-
-const SUDDEN_DEATH_MAX = 3;
-
-export interface ICompetitor {
-    readonly filePath: string;
-
-    readonly name: string;
-
-    readonly repository: URL;
-}
+import { ICompetitor } from './competitor.ts';
 
 export interface IBracketMatch {
     readonly matchIndex: number;
@@ -44,133 +33,158 @@ export interface IBracketResults {
     readonly winner: ICompetitor;
 }
 
-export async function computeMatch(
-    competitorA: ICompetitor,
-    competitorB: ICompetitor,
-    matchIndex: number,
-): Promise<IBracketMatch> {
-    // **TODO:** compute match
+export interface IBracketOptions {
+    readonly competitors: ICompetitor[];
 
-    return { matchIndex, winner };
+    readonly matchesBestOf: number;
+
+    readonly seed: bigint;
+
+    readonly suddenDeathMax: number;
 }
 
-export async function computePair(
-    competitorA: ICompetitor,
-    competitorB: ICompetitor,
-    pairIndex: number,
-): Promise<IBracketPair> {
-    const matches: IBracketMatch[] = [];
+export interface IBracket {
+    computeBracket(): Promise<IBracketResults>;
+}
 
-    let aWins = 0;
-    let bWins = 0;
-    let matchIndex = 0;
+export function makeBracket(options: IBracketOptions): IBracket {
+    const { competitors, matchesBestOf, seed, suddenDeathMax } = options;
 
-    while (
-        matchIndex < MATCHES_BEST_OF &&
-        aWins < MATCHES_WIN_COUNT &&
-        bWins < MATCHES_WIN_COUNT
-    ) {
-        const match = await computeMatch(competitorA, competitorB, matchIndex);
+    const matchesWinCount = Math.ceil(matchesBestOf / 2);
+    const prng = randomSeeded(seed);
 
-        matches.push(match);
+    async function computeMatch(
+        competitorA: ICompetitor,
+        competitorB: ICompetitor,
+        matchIndex: number,
+    ): Promise<IBracketMatch> {
+        // **TODO:** compute match
 
-        if (match.winner === competitorA) aWins++;
-        else if (match.winner === competitorB) bWins++;
-
-        matchIndex++;
+        return { matchIndex, winner };
     }
 
-    let winner: ICompetitor | null = null;
+    async function computePair(
+        competitorA: ICompetitor,
+        competitorB: ICompetitor,
+        pairIndex: number,
+    ): Promise<IBracketPair> {
+        const matches: IBracketMatch[] = [];
 
-    if (aWins > bWins) winner = competitorA;
-    else if (bWins > aWins) winner = competitorB;
-    else {
-        let suddenDeathMatches = 0;
+        let aWins = 0;
+        let bWins = 0;
+        let matchIndex = 0;
 
-        while (suddenDeathMatches < SUDDEN_DEATH_MAX) {
+        while (
+            matchIndex < matchesBestOf &&
+            aWins < matchesWinCount &&
+            bWins < matchesWinCount
+        ) {
             const match = await computeMatch(
                 competitorA,
                 competitorB,
-                matchIndex++,
+                matchIndex,
             );
 
             matches.push(match);
 
-            if (match.winner) {
-                winner = match.winner;
-                break;
-            }
+            if (match.winner === competitorA) aWins++;
+            else if (match.winner === competitorB) bWins++;
 
-            suddenDeathMatches++;
+            matchIndex++;
         }
 
-        if (suddenDeathMatches === SUDDEN_DEATH_MAX) {
-            winner = Math.random() < 0.5 ? competitorA : competitorB;
-        }
-    }
+        let winner: ICompetitor | null = null;
 
-    return {
-        competitorA,
-        competitorB,
-        matches,
-        pairIndex,
-        winner: winner!,
-    };
-}
+        if (aWins > bWins) winner = competitorA;
+        else if (bWins > aWins) winner = competitorB;
+        else {
+            let suddenDeathMatches = 0;
 
-export async function computeRound(
-    competitors: ICompetitor[],
-    roundIndex: number,
-): Promise<IBracketRound> {
-    const pairs: IBracketPair[] = await Promise.all(
-        pairElements(competitors)
-            .map((pair, pairIndex) => {
-                const [competitorA, competitorB] = pair;
-
-                return computePair(
+            while (suddenDeathMatches < suddenDeathMax) {
+                const match = await computeMatch(
                     competitorA,
                     competitorB,
-                    pairIndex,
+                    matchIndex++,
                 );
-            }),
-    );
 
-    return {
-        pairs,
-        roundIndex,
-    };
-}
+                matches.push(match);
 
-export async function computeBracket(
-    competitors: ICompetitor[],
-): Promise<IBracketResults> {
-    const rounds: IBracketRound[] = [];
+                if (match.winner) {
+                    winner = match.winner;
+                    break;
+                }
 
-    let currentRoundCompetitors = [...competitors];
-    let roundIndex = 0;
+                suddenDeathMatches++;
+            }
 
-    while (currentRoundCompetitors.length > 1) {
-        const currentRound = await computeRound(
-            currentRoundCompetitors,
-            roundIndex,
+            if (suddenDeathMatches === suddenDeathMax) {
+                winner = prng() < 0.5 ? competitorA : competitorB;
+            }
+        }
+
+        return {
+            competitorA,
+            competitorB,
+            matches,
+            pairIndex,
+            winner: winner!,
+        };
+    }
+
+    async function computeRound(
+        competitors: ICompetitor[],
+        roundIndex: number,
+    ): Promise<IBracketRound> {
+        const pairs: IBracketPair[] = await Promise.all(
+            pairElements(competitors)
+                .map((pair, pairIndex) => {
+                    const [competitorA, competitorB] = pair;
+
+                    return computePair(
+                        competitorA,
+                        competitorB,
+                        pairIndex,
+                    );
+                }),
         );
 
-        const { pairs } = currentRound;
-
-        rounds.push(currentRound);
-
-        currentRoundCompetitors = pairs
-            .map((pair) => {
-                const { winner } = pair;
-
-                return winner;
-            });
-
-        roundIndex++;
+        return {
+            pairs,
+            roundIndex,
+        };
     }
 
     return {
-        rounds,
-        winner: currentRoundCompetitors[0],
+        async computeBracket() {
+            const rounds: IBracketRound[] = [];
+
+            let currentRoundCompetitors = shuffle(competitors, { prng });
+            let roundIndex = 0;
+
+            while (currentRoundCompetitors.length > 1) {
+                const currentRound = await computeRound(
+                    currentRoundCompetitors,
+                    roundIndex,
+                );
+
+                const { pairs } = currentRound;
+
+                rounds.push(currentRound);
+
+                currentRoundCompetitors = pairs
+                    .map((pair) => {
+                        const { winner } = pair;
+
+                        return winner;
+                    });
+
+                roundIndex++;
+            }
+
+            return {
+                rounds,
+                winner: currentRoundCompetitors[0],
+            };
+        },
     };
 }
