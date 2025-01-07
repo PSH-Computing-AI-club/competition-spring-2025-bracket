@@ -1,4 +1,5 @@
 import { join } from '@std/path';
+import { randomSeeded, shuffle } from '@std/random';
 
 import { exec } from './util.ts';
 
@@ -18,12 +19,14 @@ const BRACKET_SEED = Temporal.Now.plainDateISO().since(UNIX_EPOCH).round({
     largestUnit: 'nanoseconds',
 }).nanoseconds;
 
+const NUMBER_GENERATOR = randomSeeded(BigInt(BRACKET_SEED));
+
 console.log('Starting bracket run...\n');
 console.log(`Seed: ${BRACKET_SEED}\n`);
 
 console.log('Processing competitors...');
 
-const COMPETITORS = await Promise.all(
+let COMPETITORS = await Promise.all(
     COMPETITORS_MANIFEST.map(async (competitor) => {
         const { name, repository } = competitor;
 
@@ -47,6 +50,8 @@ const COMPETITORS = await Promise.all(
     }),
 );
 
+COMPETITORS = shuffle(COMPETITORS, { prng: NUMBER_GENERATOR });
+
 console.log('Competitors:\n');
 
 for (const competitor of COMPETITORS) {
@@ -55,5 +60,3 @@ for (const competitor of COMPETITORS) {
 
     console.log(`Competitor '${name}' [${host}${pathname}]`);
 }
-
-console.log({ COMPETITORS });
