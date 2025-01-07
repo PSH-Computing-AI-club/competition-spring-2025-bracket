@@ -131,9 +131,10 @@ export function makeBracket(options: IBracketOptions): IBracket {
     ): Promise<IBracketPair> {
         const matches: IBracketMatch[] = [];
 
+        let matchIndex = 0;
+
         let aWins = 0;
         let bWins = 0;
-        let matchIndex = 0;
 
         while (
             matchIndex < matchesBestOf &&
@@ -163,17 +164,19 @@ export function makeBracket(options: IBracketOptions): IBracket {
             let suddenDeathMatches = 0;
 
             while (suddenDeathMatches < suddenDeathMax) {
+                matchIndex++;
+
                 const match = await computeMatch(
                     competitorA,
                     competitorB,
                     roundIndex,
-                    matchIndex++,
+                    matchIndex,
                 );
 
                 matches.push(match);
 
                 if (match.winner) {
-                    winner = match.winner;
+                    ({ winner } = match);
                     break;
                 }
 
