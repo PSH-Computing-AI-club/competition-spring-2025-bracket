@@ -11,6 +11,10 @@ export interface IBracketMatch {
 
     readonly matchIndex: number;
 
+    readonly firstCompetitor: ICompetitor;
+
+    readonly secondCompetitor: ICompetitor;
+
     readonly seed: number;
 
     readonly winner: ICompetitor | null;
@@ -108,9 +112,11 @@ export function makeBracket(options: IBracketOptions): IBracket {
         );
 
         return {
+            firstCompetitor,
             gridColumns,
             gridRows,
             matchIndex,
+            secondCompetitor,
             seed: simulationSeed,
             winner,
         };
