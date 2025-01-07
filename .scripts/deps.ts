@@ -2,3 +2,4 @@
 // so that Deno can easily cache them ahead-of-time rather than just-in-time.
 
 import '@std/path';
+import '@std/random';
