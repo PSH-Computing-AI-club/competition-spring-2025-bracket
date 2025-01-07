@@ -58,6 +58,24 @@ function computeMaxRounds(numberOfCompetitors: number): number {
     return Math.ceil(Math.log2(numberOfCompetitors));
 }
 
+function determineGridDimensions(roundsRemaining: number): [number, number] {
+    // We want to scale up the board as we reach the final match ups. This
+    // increases the complexity of a Dots and Boxes game session. Thus making
+    // for a tougher match.
+    switch (roundsRemaining) {
+        // finals
+        case 0:
+            return [7, 5];
+
+        // semi-finals
+        case 1:
+            return [6, 4];
+    }
+
+    // other matchups
+    return [5, 3];
+}
+
 export function makeBracket(options: IBracketOptions): IBracket {
     const { competitors, matchesBestOf, seed, suddenDeathMax } = options;
 
@@ -72,37 +90,12 @@ export function makeBracket(options: IBracketOptions): IBracket {
         roundIndex: number,
         matchIndex: number,
     ): Promise<IBracketMatch> {
-        const roundsRemaining = maxRounds - roundIndex;
         const simulationSeed = randomIntegerBetween(0, Number.MAX_SAFE_INTEGER);
 
-        let gridColumns: number | null = null;
-        let gridRows: number | null = null;
-
-        // We want to scale up the board as we reach the final match ups. This
-        // increases the complexity of a Dots and Boxes game session. Thus making
-        // for a tougher match.
-        switch (roundsRemaining) {
-            // finals
-            case 1:
-                gridColumns = 7;
-                gridRows = 5;
-
-                break;
-
-            // semi-finals
-            case 2:
-                gridColumns = 6;
-                gridRows = 4;
-
-                break;
-
-            // other matchups
-            default:
-                gridColumns = 5;
-                gridRows = 3;
-
-                break;
-        }
+        const roundsRemaining = maxRounds - roundIndex - 1;
+        const [gridColumns, gridRows] = determineGridDimensions(
+            roundsRemaining,
+        );
 
         const winner = await simulateCompetitors(
             {
