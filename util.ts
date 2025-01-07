@@ -1,3 +1,9 @@
+const UNIX_EPOCH = Temporal.PlainDate.from({
+    year: 1970,
+    month: 1,
+    day: 1,
+});
+
 export interface ICommandExecutionErrorOptions extends ErrorOptions {
     readonly code: number;
 
@@ -42,6 +48,18 @@ export async function exec(
     }
 
     return textDecoder.decode(stdout);
+}
+
+export function generateDaySeed(): bigint {
+    const { nanoseconds } = Temporal
+        .Now
+        .plainDateISO()
+        .since(UNIX_EPOCH)
+        .round({
+            largestUnit: 'nanoseconds',
+        });
+
+    return BigInt(nanoseconds);
 }
 
 export function pairElements<T>(array: T[]): T[][] {

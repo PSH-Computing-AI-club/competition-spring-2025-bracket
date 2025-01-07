@@ -1,63 +1,13 @@
-import { join } from '@std/path';
-import { randomSeeded, shuffle } from '@std/random';
+import {
+    cloneCompetitorRepositories,
+    transformCompetitorData,
+} from './competitor.ts';
+import { exec, generateDaySeed } from './util.ts';
 
-import type { ICompetitor } from './bracket.ts';
-import { exec } from './util.ts';
+import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
 
-import COMPETITORS_MANIFEST from './competitors.json' with { type: 'json' };
+const COMPETITORS = transformCompetitorData(COMPETITOR_MANIFEST);
 
-const DIRECTORY_COMPETITOR_REPOSITORIES = './competitors';
+const SEED = generateDaySeed();
 
-const FILE_COMPETITOR_PLAYER = './mod.js';
-
-const UNIX_EPOCH = Temporal.PlainDate.from({
-    year: 1970,
-    month: 1,
-    day: 1,
-});
-
-const BRACKET_SEED = Temporal.Now.plainDateISO().since(UNIX_EPOCH).round({
-    largestUnit: 'nanoseconds',
-}).nanoseconds;
-
-const NUMBER_GENERATOR = randomSeeded(BigInt(BRACKET_SEED));
-
-console.log('Starting bracket run...\n');
-console.log(`Seed: ${BRACKET_SEED}\n`);
-
-console.log('Processing competitors...');
-
-let COMPETITORS = await Promise.all(
-    COMPETITORS_MANIFEST.map(async (competitor) => {
-        const { name, repository } = competitor;
-
-        const repositoryURL = new URL(repository);
-
-        // **TODO:** git clone their repositories
-
-        // await exec('git', 'clone', repository);
-
-        const filePath = join(
-            DIRECTORY_COMPETITOR_REPOSITORIES,
-            name,
-            FILE_COMPETITOR_PLAYER,
-        );
-
-        return {
-            filePath,
-            name,
-            repository: repositoryURL,
-        };
-    }),
-) satisfies ICompetitor[];
-
-COMPETITORS = shuffle(COMPETITORS, { prng: NUMBER_GENERATOR });
-
-console.log('Competitors:\n');
-
-for (const competitor of COMPETITORS) {
-    const { name, repository } = competitor;
-    const { host, pathname } = repository;
-
-    console.log(`Competitor '${name}' [${host}${pathname}]`);
-}
+await cloneCompetitorRepositories(COMPETITORS);
