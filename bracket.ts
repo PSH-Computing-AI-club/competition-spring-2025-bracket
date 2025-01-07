@@ -48,21 +48,62 @@ export interface IBracket {
     computeBracket(): Promise<IBracketResults>;
 }
 
+function computeMaxRounds(numberOfCompetitors: number): number {
+    return Math.ceil(Math.log2(numberOfCompetitors));
+}
+
 export function makeBracket(options: IBracketOptions): IBracket {
     const { competitors, matchesBestOf, seed, suddenDeathMax } = options;
 
+    const maxRounds = computeMaxRounds(competitors.length);
     const matchesWinCount = Math.ceil(matchesBestOf / 2);
+
     const prng = randomSeeded(seed);
 
     async function computeMatch(
         competitorA: ICompetitor,
         competitorB: ICompetitor,
+        roundIndex: number,
         matchIndex: number,
     ): Promise<IBracketMatch> {
+        const roundsRemaining = maxRounds - roundIndex;
         const simulationSeed = randomIntegerBetween(0, Number.MAX_SAFE_INTEGER);
 
+        let gridColumns: number | null = null;
+        let gridRows: number | null = null;
+
+        // We want to scale up the board as we reach the final match ups. This
+        // increases the complexity of a Dots and Boxes game session. Thus making
+        // for a tougher match.
+        switch (roundsRemaining) {
+            // finals
+            case 1:
+                gridColumns = 7;
+                gridRows = 5;
+
+                break;
+
+            // semi-finals
+            case 2:
+                gridColumns = 6;
+                gridRows = 4;
+
+                break;
+
+            // other matchups
+            default:
+                gridColumns = 5;
+                gridRows = 3;
+
+                break;
+        }
+
         const winner = await simulateCompetitors(
-            { seed: simulationSeed },
+            {
+                gridColumns,
+                gridRows,
+                seed: simulationSeed,
+            },
             competitorA,
             competitorB,
         );
@@ -73,6 +114,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
     async function computePair(
         competitorA: ICompetitor,
         competitorB: ICompetitor,
+        roundIndex: number,
         pairIndex: number,
     ): Promise<IBracketPair> {
         const matches: IBracketMatch[] = [];
@@ -89,6 +131,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
             const match = await computeMatch(
                 competitorA,
                 competitorB,
+                roundIndex,
                 matchIndex,
             );
 
@@ -111,6 +154,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
                 const match = await computeMatch(
                     competitorA,
                     competitorB,
+                    roundIndex,
                     matchIndex++,
                 );
 
@@ -150,6 +194,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
                     return computePair(
                         competitorA,
                         competitorB,
+                        roundIndex,
                         pairIndex,
                     );
                 }),
