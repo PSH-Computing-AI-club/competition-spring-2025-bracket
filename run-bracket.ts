@@ -1,9 +1,9 @@
-import { makeBracket } from './bracket.ts';
+import { makeBracket } from './lib/bracket.ts';
 import {
     cloneCompetitorRepositories,
     transformCompetitorData,
-} from './competitor.ts';
-import { generateDaySeed } from './util.ts';
+} from './lib/competitor.ts';
+import { generateDaySeed } from './lib/util.ts';
 
 import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
 
