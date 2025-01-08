@@ -27,6 +27,18 @@ export class CommandExecutionError extends Error {
     }
 }
 
+export async function doesPathExist(path: string | URL): Promise<boolean> {
+    try {
+        await Deno.lstat(path);
+    } catch (error) {
+        if (error instanceof Deno.errors.NotFound) return false;
+
+        throw error;
+    }
+
+    return true;
+}
+
 export async function exec(
     filePath: string,
     ...args: string[]

@@ -1,8 +1,12 @@
 import { join } from '@std/path';
 
+import { doesPathExist } from './util.ts';
+
 const DIRECTORY_COMPETITOR_REPOSITORIES = './competitors';
 
-const FILE_COMPETITOR_PLAYER = './mod.js';
+const FILE_PLAYER_JAVASCRIPT = './mod.js';
+
+const FILE_PLAYER_TYPESCRIPT = './mod.ts';
 
 export interface ICompetitorData {
     readonly name: string;
@@ -20,23 +24,35 @@ export interface ICompetitor {
 
 export function transformCompetitorData(
     competitorManifest: ICompetitorData[],
-): ICompetitor[] {
-    return competitorManifest
-        .map((competitor) => {
-            const { name, repository } = competitor;
+): Promise<ICompetitor[]> {
+    return Promise.all(
+        competitorManifest
+            .map(async (competitor) => {
+                const { name, repository } = competitor;
 
-            const repositoryURL = new URL(repository);
+                const repositoryURL = new URL(repository);
 
-            const playerFile = join(
-                DIRECTORY_COMPETITOR_REPOSITORIES,
-                name,
-                FILE_COMPETITOR_PLAYER,
-            );
+                const javascriptPlayerFile = join(
+                    DIRECTORY_COMPETITOR_REPOSITORIES,
+                    name,
+                    FILE_PLAYER_JAVASCRIPT,
+                );
 
-            return {
-                name,
-                playerFile,
-                repository: repositoryURL,
-            };
-        });
+                const typescriptPlayerFile = join(
+                    DIRECTORY_COMPETITOR_REPOSITORIES,
+                    name,
+                    FILE_PLAYER_TYPESCRIPT,
+                );
+
+                const playerFile = await doesPathExist(typescriptPlayerFile)
+                    ? typescriptPlayerFile
+                    : javascriptPlayerFile;
+
+                return {
+                    name,
+                    playerFile,
+                    repository: repositoryURL,
+                };
+            }),
+    );
 }
