@@ -215,19 +215,20 @@ export function makeBracket(options: IBracketOptions): IBracket {
         competitors: ICompetitor[],
         roundIndex: number,
     ): Promise<IBracketRound> {
-        const pairs: IBracketPair[] = await Promise.all(
-            pairElements(competitors)
-                .map((pair, pairIndex) => {
-                    const [competitorA, competitorB] = pair;
+        const pairs: IBracketPair[] = [];
 
-                    return computePair(
-                        competitorA,
-                        competitorB,
-                        roundIndex,
-                        pairIndex,
-                    );
-                }),
-        );
+        for (const [pairIndex, pair] of pairElements(competitors).entries()) {
+            const [competitorA, competitorB] = pair;
+
+            const computedPair = await computePair(
+                competitorA,
+                competitorB,
+                roundIndex,
+                pairIndex,
+            );
+
+            pairs.push(computedPair);
+        }
 
         return {
             pairs,
