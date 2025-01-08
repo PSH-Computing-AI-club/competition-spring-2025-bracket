@@ -267,8 +267,8 @@ export async function simulate(
 
     const eventLog = JSON.parse(jsonPayload) as IGameLogMessage[];
 
-    const competitorsWhoErrored = new Set<string>();
-    const competitorScores: Record<string, number> = {};
+    const competitorsWhoErrored = new Set<ICompetitor>();
+    const competitorScores = new Map<ICompetitor, number>();
 
     for (const message of eventLog) {
         const { message: messageKind } = message;
@@ -283,9 +283,8 @@ export async function simulate(
                     UTF16_CODE_LETTER_A;
 
                 const competitor = competitors[competitorIndex];
-                const { name } = competitor;
 
-                competitorsWhoErrored.add(name);
+                competitorsWhoErrored.add(competitor);
                 break;
             }
 
@@ -298,9 +297,8 @@ export async function simulate(
                         UTF16_CODE_LETTER_A;
 
                     const competitor = competitors[competitorIndex];
-                    const { name } = competitor;
 
-                    competitorScores[name] = score;
+                    competitorScores.set(competitor, score);
                 }
 
                 break;
@@ -308,26 +306,22 @@ export async function simulate(
         }
     }
 
-    const winningCompetitors = new Set<ICompetitor>();
-    let highestScore: number = -1;
+    let tie: boolean = false;
+    let winningCompetitor: ICompetitor | null = null;
 
     for (const competitor of competitors) {
-        const { name } = competitor;
-        const score = competitorScores[name];
+        if (competitorsWhoErrored.has(competitor)) continue;
 
-        if (highestScore < score) {
-            winningCompetitors.clear();
+        const competitorScore = competitorScores.get(competitor)!;
+        const winningScore = winningCompetitor
+            ? competitorScores.get(winningCompetitor)!
+            : -1;
 
-            highestScore = score;
-            winningCompetitors.add(competitor);
-        } else if (highestScore === score) winningCompetitors.add(competitor);
+        if (competitorScore > winningScore) {
+            winningCompetitor = competitor;
+            tie = false;
+        } else if (competitorScore === winningScore) tie = true;
     }
 
-    if (highestScore > 0 && winningCompetitors.size === 1) {
-        const [winningCompetitor] = winningCompetitors.values();
-
-        return winningCompetitor;
-    }
-
-    return null;
+    return tie ? null : winningCompetitor;
 }
