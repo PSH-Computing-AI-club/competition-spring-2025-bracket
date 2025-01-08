@@ -32,21 +32,6 @@ export interface ISimulateCompetitorsOptions {
     readonly timeout?: number;
 }
 
-export async function cloneCompetitorRepositories(
-    competitors: ICompetitor[],
-): Promise<void> {
-    await Promise.all(
-        competitors
-            .map(async (competitor) => {
-                const { repository } = competitor;
-
-                // **TODO:** git clone their repositories
-
-                // return exec('git', 'clone', repository.toString());
-            }),
-    );
-}
-
 export async function simulateCompetitors(
     options: ISimulateCompetitorsOptions,
     ...competitors: ICompetitor[]

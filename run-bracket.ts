@@ -1,8 +1,5 @@
 import { makeBracket } from './lib/bracket.ts';
-import {
-    cloneCompetitorRepositories,
-    transformCompetitorData,
-} from './lib/competitor.ts';
+import { transformCompetitorData } from './lib/competitor.ts';
 import { generateDaySeed } from './lib/util.ts';
 
 import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
@@ -10,8 +7,6 @@ import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
 const COMPETITORS = transformCompetitorData(COMPETITOR_MANIFEST);
 
 const SEED = generateDaySeed();
-
-await cloneCompetitorRepositories(COMPETITORS);
 
 const bracket = makeBracket({
     competitors: COMPETITORS,
