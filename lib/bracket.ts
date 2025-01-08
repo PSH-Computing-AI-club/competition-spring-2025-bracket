@@ -94,7 +94,11 @@ export function makeBracket(options: IBracketOptions): IBracket {
         roundIndex: number,
         matchIndex: number,
     ): Promise<IBracketMatch> {
-        const simulationSeed = randomIntegerBetween(0, Number.MAX_SAFE_INTEGER);
+        const simulationSeed = randomIntegerBetween(
+            0,
+            Number.MAX_SAFE_INTEGER,
+            { prng },
+        );
 
         const roundsRemaining = maxRounds - roundIndex - 1;
         const [gridColumns, gridRows] = determineGridDimensions(
