@@ -14,6 +14,10 @@
 
 ...
 
+### How is it determined who goes first?
+
+...
+
 ### Do players take another turn after a capture?
 
 ...
