@@ -251,7 +251,7 @@ export async function simulate(
         prefix: 'SIMULATION_',
     });
 
-    exec(
+    await exec(
         FILE_GAME_ENGINE,
         'simulate',
         '--output-file',
