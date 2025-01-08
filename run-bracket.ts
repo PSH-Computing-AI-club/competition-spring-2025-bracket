@@ -6,9 +6,13 @@ import { generateDaySeed } from './lib/util.ts';
 
 import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
 
+const TODAY = Temporal.Now.plainDateISO();
+
 const SEED = generateDaySeed();
 
-const DIRECTORY_OUTPUT = `./dist/output/${SEED}`;
+const DIRECTORY_OUTPUT = `./dist/output/${TODAY.year}-${
+    TODAY.month.toString().padStart(2, '0')
+}-${TODAY.day.toString().padStart(2, '0')}`;
 
 const DIRECTORY_GAME_LOGS = join(DIRECTORY_OUTPUT, 'game-logs');
 
