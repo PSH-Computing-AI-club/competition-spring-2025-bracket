@@ -263,7 +263,9 @@ export async function simulate(
     );
 
     const logText = await Deno.readTextFile(logFilePath);
-    const eventLog = JSON.parse(`[${logText}]`) as IGameLogMessage[];
+    const jsonPayload = `[${logText.trim().split('\n').join(',')}]`;
+
+    const eventLog = JSON.parse(jsonPayload) as IGameLogMessage[];
 
     const competitorsWhoErrored = new Set<string>();
     const competitorScores: Record<string, number> = {};
