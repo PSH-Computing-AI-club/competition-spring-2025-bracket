@@ -22,6 +22,10 @@
 
 ...
 
+### How is the winner determined?
+
+...
+
 ## Code Submission
 
 ...
