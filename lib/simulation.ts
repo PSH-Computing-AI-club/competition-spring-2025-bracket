@@ -3,6 +3,8 @@ import { exec } from './util.ts';
 
 const FILE_GAME_ENGINE = './.bin/dotsandboxes-linux';
 
+const UTF16_CODE_LETTER_A = 'A'.charCodeAt(0);
+
 const MESSAGE_KIND = {
     appliedCapture: 'MESSAGE_APPLIED_CAPTURE',
 
@@ -275,6 +277,47 @@ export async function simulate(
 
     const logText = Deno.readTextFile(logFilePath);
     const eventLog = JSON.parse(`[${logText}]`) as IGameLogMessage[];
+
+    const competitorsWhoErrored = new Set<string>();
+    const competitorScores: Record<string, number> = {};
+
+    for (const message of eventLog) {
+        const { message: messageKind } = message;
+
+        switch (messageKind) {
+            case MESSAGE_KIND.playerError:
+            case MESSAGE_KIND.playerForfeit:
+            case MESSAGE_KIND.playerTimeout: {
+                const { playerInitial } = message.args;
+
+                const competitorIndex = UTF16_CODE_LETTER_A -
+                    playerInitial.charCodeAt(0);
+
+                const competitor = competitors[competitorIndex];
+                const { name } = competitor;
+
+                competitorsWhoErrored.add(name);
+                break;
+            }
+
+            case MESSAGE_KIND.sessionEnd: {
+                const { scores } = message.args;
+
+                for (const playerInitial in scores) {
+                    const score = scores[playerInitial];
+                    const competitorIndex = UTF16_CODE_LETTER_A -
+                        playerInitial.charCodeAt(0);
+
+                    const competitor = competitors[competitorIndex];
+                    const { name } = competitor;
+
+                    competitorScores[name] = score;
+                }
+
+                break;
+            }
+        }
+    }
 
     return null;
 }
