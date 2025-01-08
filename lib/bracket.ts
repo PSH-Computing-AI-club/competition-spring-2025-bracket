@@ -1,8 +1,19 @@
 import { randomIntegerBetween, randomSeeded, shuffle } from '@std/random';
+import { join } from '@std/path';
 
 import type { ICompetitor } from './competitor.ts';
 import { simulate } from './simulation.ts';
 import { pairElements } from './util.ts';
+
+const FILE_GAME_LOG = (
+    { matchIndex, pairIndex, roundIndex }: {
+        matchIndex: number;
+        pairIndex: number;
+        roundIndex: number;
+    },
+) => `round-${roundIndex + 1}.pair-${pairIndex + 1}.match-${
+    matchIndex + 1
+}.json`;
 
 export interface IBracketMatch {
     readonly gridColumns: number;
@@ -47,6 +58,8 @@ export interface IBracketResults {
 export interface IBracketOptions {
     readonly competitors: ICompetitor[];
 
+    readonly logPath: string;
+
     readonly matchesBestOf: number;
 
     readonly seed: bigint;
@@ -81,7 +94,13 @@ function determineGridDimensions(roundsRemaining: number): [number, number] {
 }
 
 export function makeBracket(options: IBracketOptions): IBracket {
-    const { competitors, matchesBestOf, seed, suddenDeathMax } = options;
+    const {
+        competitors,
+        logPath,
+        matchesBestOf,
+        seed,
+        suddenDeathMax,
+    } = options;
 
     const maxRounds = computeMaxRounds(competitors.length);
     const matchesWinCount = Math.ceil(matchesBestOf / 2);
@@ -92,6 +111,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
         playerA: ICompetitor,
         playerB: ICompetitor,
         roundIndex: number,
+        pairIndex: number,
         matchIndex: number,
     ): Promise<IBracketMatch> {
         const simulationSeed = randomIntegerBetween(
@@ -105,10 +125,16 @@ export function makeBracket(options: IBracketOptions): IBracket {
             roundsRemaining,
         );
 
+        const logFilePath = join(
+            logPath,
+            FILE_GAME_LOG({ matchIndex, pairIndex, roundIndex }),
+        );
+
         const winner = await simulate(
             {
                 gridColumns,
                 gridRows,
+                logFilePath,
                 seed: simulationSeed,
             },
             playerA,
@@ -152,6 +178,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
                 playerA,
                 playerB,
                 roundIndex,
+                pairIndex,
                 matchIndex,
             );
 
@@ -188,6 +215,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
                     competitorA,
                     competitorB,
                     roundIndex,
+                    pairIndex,
                     matchIndex,
                 );
 
@@ -242,6 +270,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
     return {
         competitors,
+        logPath,
         matchesBestOf,
         seed,
         suddenDeathMax,

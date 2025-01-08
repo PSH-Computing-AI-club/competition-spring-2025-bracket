@@ -199,6 +199,8 @@ export interface ISimulateOptions {
 
     readonly gridRows?: number;
 
+    readonly logFilePath: string;
+
     readonly seed?: number;
 
     readonly timeout?: number;
@@ -208,7 +210,7 @@ export async function simulate(
     options: ISimulateOptions,
     ...competitors: ICompetitor[]
 ): Promise<ICompetitor | null> {
-    const { gridColumns, gridRows, seed, timeout } = options;
+    const { gridColumns, gridRows, logFilePath, seed, timeout } = options;
 
     const cliOptions: string[] = [];
 
@@ -246,10 +248,6 @@ export async function simulate(
 
             return playerFile;
         });
-
-    const logFilePath = await Deno.makeTempFile({
-        prefix: 'SIMULATION_',
-    });
 
     await exec(
         FILE_GAME_ENGINE,
