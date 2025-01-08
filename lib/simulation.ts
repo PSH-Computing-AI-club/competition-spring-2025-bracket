@@ -319,5 +319,26 @@ export async function simulate(
         }
     }
 
+    const winningCompetitors = new Set<ICompetitor>();
+    let highestScore: number = -1;
+
+    for (const competitor of competitors) {
+        const { name } = competitor;
+        const score = competitorScores[name];
+
+        if (highestScore < score) {
+            winningCompetitors.clear();
+
+            highestScore = score;
+            winningCompetitors.add(competitor);
+        } else if (highestScore === score) winningCompetitors.add(competitor);
+    }
+
+    if (highestScore > 0 && winningCompetitors.size === 1) {
+        const [winningCompetitor] = winningCompetitors.values();
+
+        return winningCompetitor;
+    }
+
     return null;
 }
