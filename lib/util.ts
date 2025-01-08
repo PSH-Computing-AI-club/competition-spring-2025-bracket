@@ -1,8 +1,14 @@
+const NOW = Temporal.Now.plainDateTimeISO();
+
 const UNIX_EPOCH = Temporal.PlainDate.from({
     year: 1970,
     month: 1,
     day: 1,
 });
+
+export const RUN_IDENTIFIER = `${NOW.year}-${
+    NOW.month.toString().padStart(2, '0')
+}-${NOW.day.toString().padStart(2, '0')}`;
 
 export interface ICommandExecutionErrorOptions extends ErrorOptions {
     readonly code: number;
