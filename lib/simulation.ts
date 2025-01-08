@@ -254,7 +254,7 @@ export async function simulate(
     exec(
         FILE_GAME_ENGINE,
         'simulate',
-        '--output-path',
+        '--output-file',
         logFilePath,
         '--output-kind',
         'jsonl',
