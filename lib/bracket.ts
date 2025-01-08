@@ -1,7 +1,7 @@
 import { randomIntegerBetween, randomSeeded, shuffle } from '@std/random';
 
 import type { ICompetitor } from './competitor.ts';
-import { simulateCompetitors } from './competitor.ts';
+import { simulate } from './simulation.ts';
 import { pairElements } from './util.ts';
 
 export interface IBracketMatch {
@@ -101,7 +101,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
             roundsRemaining,
         );
 
-        const winner = await simulateCompetitors(
+        const winner = await simulate(
             {
                 gridColumns,
                 gridRows,
