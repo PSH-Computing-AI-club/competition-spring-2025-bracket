@@ -102,7 +102,7 @@
 
 ...
 
-### How is the winners of the competition determined?
+### How are the winners of the competition determined?
 
 ...
 
