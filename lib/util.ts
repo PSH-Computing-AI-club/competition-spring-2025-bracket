@@ -1,14 +1,20 @@
 const NOW = Temporal.Now.plainDateTimeISO();
 
+const RUNS_PER_DAY = 6;
+
+const HOURS_BETWEEN_RUNS = 24 / RUNS_PER_DAY;
+
 const UNIX_EPOCH = Temporal.PlainDate.from({
     year: 1970,
     month: 1,
     day: 1,
 });
 
+export const RUN_NUMBER = Math.floor(NOW.hour / HOURS_BETWEEN_RUNS);
+
 export const RUN_IDENTIFIER = `${NOW.year}-${
     NOW.month.toString().padStart(2, '0')
-}-${NOW.day.toString().padStart(2, '0')}`;
+}-${NOW.day.toString().padStart(2, '0')}.${RUN_NUMBER}`;
 
 export interface ICommandExecutionErrorOptions extends ErrorOptions {
     readonly code: number;
