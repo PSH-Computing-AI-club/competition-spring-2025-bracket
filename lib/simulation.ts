@@ -262,7 +262,7 @@ export async function simulate(
         ...playerFiles,
     );
 
-    const logText = Deno.readTextFile(logFilePath);
+    const logText = await Deno.readTextFile(logFilePath);
     const eventLog = JSON.parse(`[${logText}]`) as IGameLogMessage[];
 
     const competitorsWhoErrored = new Set<string>();
