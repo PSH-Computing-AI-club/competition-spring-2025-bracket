@@ -279,8 +279,8 @@ export async function simulate(
             case MESSAGE_KIND.playerTimeout: {
                 const { playerInitial } = message.args;
 
-                const competitorIndex = UTF16_CODE_LETTER_A -
-                    playerInitial.charCodeAt(0);
+                const competitorIndex = playerInitial.charCodeAt(0) -
+                    UTF16_CODE_LETTER_A;
 
                 const competitor = competitors[competitorIndex];
                 const { name } = competitor;
@@ -294,8 +294,8 @@ export async function simulate(
 
                 for (const playerInitial in scores) {
                     const score = scores[playerInitial];
-                    const competitorIndex = UTF16_CODE_LETTER_A -
-                        playerInitial.charCodeAt(0);
+                    const competitorIndex = playerInitial.charCodeAt(0) -
+                        UTF16_CODE_LETTER_A;
 
                     const competitor = competitors[competitorIndex];
                     const { name } = competitor;
