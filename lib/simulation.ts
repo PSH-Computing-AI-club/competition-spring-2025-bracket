@@ -274,7 +274,7 @@ export async function simulate(
     );
 
     const logText = Deno.readTextFile(logFilePath);
-    const eventLog = JSON.parse(`[${logText}]`);
+    const eventLog = JSON.parse(`[${logText}]`) as IGameLogMessage[];
 
     return null;
 }
