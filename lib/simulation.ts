@@ -56,8 +56,23 @@ export async function simulate(
             return playerFile;
         });
 
-    // **TODO:** game log parsing
-    // exec(FILE_GAME_ENGINE, 'simulate', ...cliOptions, ...playerFiles);
+    const logFilePath = await Deno.makeTempFile({
+        prefix: 'SIMULATION_',
+    });
+
+    exec(
+        FILE_GAME_ENGINE,
+        'simulate',
+        '--output-path',
+        logFilePath,
+        '--output-kind',
+        'jsonl',
+        ...cliOptions,
+        ...playerFiles,
+    );
+
+    const logText = Deno.readTextFile(logFilePath);
+    const eventLog = JSON.parse(`[${logText}]`);
 
     return null;
 }
