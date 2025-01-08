@@ -25,6 +25,10 @@
         }
     },
 
+    "exclude": [
+        "./competitors"
+    ],
+
     "tasks": {
         "check": "deno task check:format;deno task check:types;deno task check:lint",
         "check:format": "deno fmt --check ./",
