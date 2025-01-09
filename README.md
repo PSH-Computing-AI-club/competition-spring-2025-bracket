@@ -49,7 +49,7 @@ The repositories will be cloned to the `./competitors/` directory.
 
 To run a tournament bracket of the configured competitors type `deno task bracket:run` in a terminal.
 
-The results will be written to the `./dist/output/YYYY-MM-DD.RUNNUMBER/` directory.
+The results will be written to the `./dist/output/YYYY-MM-DD.RUNNUMBER/` directory. You can calculate `RUNNUMBER` by the following expression: `floor(currentHour / (24 hoursPerDay / 6 runsPerDay))`.
 
 ### Generate HTML Visualization
 
