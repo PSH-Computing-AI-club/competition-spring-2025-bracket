@@ -35,7 +35,6 @@
         "check:lint": "deno lint ./",
         "check:types": "deno check ./",
         "deps:cache": "deno cache ./.scripts/deps.ts",
-        "format": "deno fmt ./",
-        "test": "deno test --allow-all"
+        "format": "deno fmt ./"
     }
 }
