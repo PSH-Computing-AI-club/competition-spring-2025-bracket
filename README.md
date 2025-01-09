@@ -57,6 +57,12 @@ To generates HTML visualization of tournament results type `deno task bracket:vi
 
 The results will be written to the `./dist/html/` directory.
 
+## Practice Brackets
+
+During the practice tournament brackets timeframe, Bracket Runner will automatically be run by [GitHub Actions](./.github/workflows/practice-brackets.yaml) every day, six times a day.
+
+The results HTML visualized will automatically be published to [GitHub Pages](https://psh-computing-ai-club.github.io/competition-spring-2025-bracket) after every run.
+
 ## License
 
 The Bracket Runner game engine is [licensed](./LICENSE) under the MIT License.
