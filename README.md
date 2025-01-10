@@ -47,6 +47,8 @@ The repositories will be cloned to the `./competitors/` directory.
 
 > **NOTE:** You need internet access for the first time you run a simulation so [`deno_emit`](https://github.com/denoland/deno_emit) can download its payload.
 
+> **WARNING:** Brackets need to have powers of 2 amount of competitors in the manifest. If there are not enough competitors, please use the placeholder repository to fill missing slots.
+
 To run a tournament bracket of the configured competitors type `deno task bracket:run` in a terminal.
 
 The results will be written to the `./dist/output/YYYY-MM-DD.RUNNUMBER/` directory. You can calculate `RUNNUMBER` by the following expression: `floor(currentHour / (24 hoursPerDay / 6 runsPerDay))`.
