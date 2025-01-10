@@ -100,10 +100,10 @@ function transformMatches(
                 gridColumns,
                 gridRows,
                 matchIndex,
-                playerA: playerA.name,
-                playerB: playerB.name,
+                playerA: playerA.identifier,
+                playerB: playerB.identifier,
                 seed,
-                winner: winner?.name ?? null,
+                winner: winner?.identifier ?? null,
             };
         });
 }
@@ -122,10 +122,10 @@ function transformPairs(
             } = pair;
 
             return {
-                competitorA: competitorA.name,
-                competitorB: competitorB.name,
+                competitorA: competitorA.identifier,
+                competitorB: competitorB.identifier,
                 pairIndex,
-                winner: winner.name,
+                winner: winner.identifier,
 
                 matches: transformMatches(matches),
             };
@@ -163,9 +163,9 @@ export function transformBracketResults(
         seed: seed.toString(),
         suddenDeathMax,
 
-        firstPlace: firstPlace.name,
-        secondPlace: secondPlace.name,
-        thirdPlace: thirdPlace.name,
+        firstPlace: firstPlace.identifier,
+        secondPlace: secondPlace.identifier,
+        thirdPlace: thirdPlace.identifier,
 
         competitors: competitors.map((competitor) => {
             const { identifier, name, playerFile, repository } = competitor;
