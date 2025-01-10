@@ -23,6 +23,8 @@ export interface ICompetitor {
     readonly playerFile: string;
 
     readonly repository: URL;
+
+    readonly repositoryDirectory: string;
 }
 
 export function transformCompetitorData(
@@ -36,15 +38,18 @@ export function transformCompetitorData(
                 const identifier = slug(name) as string;
                 const repositoryURL = new URL(repository);
 
-                const javascriptPlayerFile = join(
+                const repositoryDirectory = join(
                     DIRECTORY_COMPETITOR_REPOSITORIES,
                     identifier,
+                );
+
+                const javascriptPlayerFile = join(
+                    repositoryDirectory,
                     FILE_PLAYER_JAVASCRIPT,
                 );
 
                 const typescriptPlayerFile = join(
-                    DIRECTORY_COMPETITOR_REPOSITORIES,
-                    identifier,
+                    repositoryDirectory,
                     FILE_PLAYER_TYPESCRIPT,
                 );
 
@@ -57,6 +62,7 @@ export function transformCompetitorData(
                     name,
                     playerFile,
                     repository: repositoryURL,
+                    repositoryDirectory,
                 };
             }),
     );
