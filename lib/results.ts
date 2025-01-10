@@ -1,6 +1,12 @@
 import { basename, dirname, join } from '@std/path';
 
-import type { IBracket, IBracketResults } from './bracket.ts';
+import type {
+    IBracket,
+    IBracketMatch,
+    IBracketPair,
+    IBracketResults,
+    IBracketRound,
+} from './bracket.ts';
 import type { ICompetitor } from './competitor.ts';
 
 export interface IRunResults {
@@ -45,6 +51,69 @@ export interface IRunResults {
     readonly winner: string;
 }
 
+function transformMatches(
+    matches: IBracketMatch[],
+): IRunResults['rounds'][number]['pairs'][number]['matches'] {
+    return matches
+        .map((match) => {
+            const {
+                gridColumns,
+                gridRows,
+                matchIndex,
+                playerA,
+                playerB,
+                seed,
+                winner,
+            } = match;
+
+            return {
+                gridColumns,
+                gridRows,
+                matchIndex,
+                playerA: playerA.name,
+                playerB: playerB.name,
+                seed,
+                winner: winner?.name ?? null,
+            };
+        });
+}
+
+function transformPairs(
+    pairs: IBracketPair[],
+): IRunResults['rounds'][number]['pairs'] {
+    return pairs
+        .map((pair) => {
+            const {
+                competitorA,
+                competitorB,
+                matches,
+                pairIndex,
+                winner,
+            } = pair;
+
+            return {
+                competitorA: competitorA.name,
+                competitorB: competitorB.name,
+                pairIndex,
+                winner: winner.name,
+
+                matches: transformMatches(matches),
+            };
+        });
+}
+
+function transformRounds(rounds: IBracketRound[]): IRunResults['rounds'] {
+    return rounds
+        .map((round) => {
+            const { pairs, roundIndex } = round;
+
+            return {
+                roundIndex,
+                pairs: transformPairs(pairs),
+            };
+        });
+}
+
 export function transformBracketResults(
     bracket: IBracket,
     bracketResults: IBracketResults,
@@ -81,54 +150,6 @@ export function transformBracketResults(
         suddenDeathMax,
 
         winner: winner.name,
-
-        rounds: rounds
-            .map((round) => {
-                const { pairs, roundIndex } = round;
-
-                return {
-                    roundIndex,
-                    pairs: pairs
-                        .map((pair) => {
-                            const {
-                                competitorA,
-                                competitorB,
-                                matches,
-                                pairIndex,
-                                winner,
-                            } = pair;
-
-                            return {
-                                competitorA: competitorA.name,
-                                competitorB: competitorB.name,
-                                pairIndex,
-                                winner: winner.name,
-
-                                matches: matches
-                                    .map((match) => {
-                                        const {
-                                            gridColumns,
-                                            gridRows,
-                                            matchIndex,
-                                            playerA,
-                                            playerB,
-                                            seed,
-                                            winner,
-                                        } = match;
-
-                                        return {
-                                            gridColumns,
-                                            gridRows,
-                                            matchIndex,
-                                            playerA: playerA.name,
-                                            playerB: playerB.name,
-                                            seed,
-                                            winner: winner?.name ?? null,
-                                        };
-                                    }),
-                            };
-                        }),
-                };
-            }),
+        rounds: transformRounds(rounds),
     };
 }
