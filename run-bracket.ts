@@ -1,17 +1,15 @@
-import { join } from '@std/path';
-
 import { makeBracket } from './lib/bracket.ts';
 import { transformCompetitorData } from './lib/competitor.ts';
 import { transformBracketResults } from './lib/results.ts';
-import { generateDaySeed, RUN_IDENTIFIER } from './lib/util.ts';
+import {
+    DIRECTORY_GAME_LOGS,
+    DIRECTORY_RUN_OUTPUT,
+    generateRunSeed,
+} from './lib/run.ts';
 
 import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
 
-const DIRECTORY_OUTPUT = `./dist/output/${RUN_IDENTIFIER}`;
-
-const DIRECTORY_GAME_LOGS = join(DIRECTORY_OUTPUT, 'game-logs');
-
-await Deno.mkdir(DIRECTORY_OUTPUT, { recursive: true });
+await Deno.mkdir(DIRECTORY_RUN_OUTPUT, { recursive: true });
 
 const COMPETITORS = await transformCompetitorData(COMPETITOR_MANIFEST);
 
@@ -19,7 +17,7 @@ const bracket = makeBracket({
     competitors: COMPETITORS,
     logPath: DIRECTORY_GAME_LOGS,
     matchesBestOf: 5,
-    seed: generateDaySeed(),
+    seed: generateRunSeed(),
     suddenDeathMax: 3,
 });
 
