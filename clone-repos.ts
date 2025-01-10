@@ -1,4 +1,7 @@
-import { DIRECTORY_COMPETITOR_REPOSITORIES } from './lib/competitor.ts';
+import {
+    DIRECTORY_COMPETITOR_REPOSITORIES,
+    transformCompetitorData,
+} from './lib/competitor.ts';
 import { exec } from './lib/util.ts';
 
 import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
@@ -7,8 +10,10 @@ import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
 
 await Deno.mkdir(DIRECTORY_COMPETITOR_REPOSITORIES, { recursive: true });
 
+const COMPETITORS = await transformCompetitorData(COMPETITOR_MANIFEST);
+
 await Promise.all(
-    COMPETITOR_MANIFEST
+    COMPETITORS
         .map(async (competitor) => {
             const { repository } = competitor;
 
