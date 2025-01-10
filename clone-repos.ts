@@ -18,6 +18,7 @@ await Promise.all(
             const output = await exec(
                 'git',
                 'clone',
+                '--progress',
                 repository.toString(),
                 repositoryDirectory,
             );
