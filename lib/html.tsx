@@ -1,3 +1,13 @@
+const TEXT_STYLE = await Deno.readTextFile('./lib/style.css');
+
+function Style() {
+    return (
+        <style
+            dangerouslySetInnerHTML={{ __html: TEXT_STYLE }}
+        />
+    );
+}
+
 export function Document() {
     return (
         <html lang='en'>
@@ -12,6 +22,8 @@ export function Document() {
                     Bracket :: Spring '25 Blossoming Battlegrounds — PSH
                     Computing & AI Club
                 </title>
+
+                <Style />
             </head>
 
             <body>
