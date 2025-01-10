@@ -2,7 +2,13 @@
     "imports": {
         "@std/path": "jsr:@std/path@^1.0.8",
         "@std/random": "jsr:@std/random@^0.1.0",
+        "preact": "npm:preact@^10.25.4",
         "slug": "npm:slug@^10.0.0"
+    },
+
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "preact"
     },
 
     "unstable": [
