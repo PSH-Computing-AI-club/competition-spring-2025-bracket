@@ -1,5 +1,3 @@
-import { basename, dirname, join } from '@std/path';
-
 import type {
     IBracket,
     IBracketMatch,
@@ -7,10 +5,13 @@ import type {
     IBracketResults,
     IBracketRound,
 } from './bracket.ts';
-import type { ICompetitor } from './competitor.ts';
 
 export interface IRunResults {
-    readonly competitors: ICompetitor[];
+    readonly competitors: {
+        readonly identifier: string;
+
+        readonly name: string;
+    }[];
 
     readonly firstPlace: string;
 
@@ -168,21 +169,11 @@ export function transformBracketResults(
         thirdPlace: thirdPlace.identifier,
 
         competitors: competitors.map((competitor) => {
-            const { identifier, name, playerFile, repository } = competitor;
-
-            const playerBaseName = basename(playerFile);
-            const playerDirectoryName = basename(dirname(playerFile));
-
-            const correctedPlayerFile = join(
-                playerDirectoryName,
-                playerBaseName,
-            );
+            const { identifier, name } = competitor;
 
             return {
                 identifier,
                 name,
-                playerFile: correctedPlayerFile,
-                repository,
             };
         }),
 
