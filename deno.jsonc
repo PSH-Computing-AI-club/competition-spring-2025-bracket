@@ -1,7 +1,8 @@
 {
     "imports": {
         "@std/path": "jsr:@std/path@^1.0.8",
-        "@std/random": "jsr:@std/random@^0.1.0"
+        "@std/random": "jsr:@std/random@^0.1.0",
+        "slug": "npm:slug@^10.0.0"
     },
 
     "unstable": [
