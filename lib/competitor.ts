@@ -3,11 +3,11 @@ import slug from 'slug';
 
 import { doesPathExist } from './util.ts';
 
-const DIRECTORY_COMPETITOR_REPOSITORIES = './competitors';
+export const DIRECTORY_COMPETITOR_REPOSITORIES = './competitors';
 
-const FILE_PLAYER_JAVASCRIPT = './mod.js';
+export const FILE_PLAYER_JAVASCRIPT = './mod.js';
 
-const FILE_PLAYER_TYPESCRIPT = './mod.ts';
+export const FILE_PLAYER_TYPESCRIPT = './mod.ts';
 
 export interface ICompetitorData {
     readonly name: string;
