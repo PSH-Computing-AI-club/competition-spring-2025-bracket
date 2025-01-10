@@ -1,6 +1,8 @@
 import type { ICompetitor } from './competitor.ts';
 
 export interface IRunResults {
+    readonly competitors: ICompetitor[];
+
     readonly matchesBestOf: number;
 
     readonly seed: string;

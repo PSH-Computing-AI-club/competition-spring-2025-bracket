@@ -26,7 +26,9 @@ const { computeBracket, matchesBestOf, seed, suddenDeathMax } = makeBracket({
 const bracketResults = await computeBracket();
 
 const runResults = {
+    competitors: COMPETITORS,
     matchesBestOf,
+
     // **HACK:** The type of `seed` is `bigint`. JSON only natively supports storing
     // number values that are equal to or less than `Number.MAX_SAFE_INTEGER`.
     //
