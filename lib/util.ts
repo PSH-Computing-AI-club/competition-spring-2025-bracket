@@ -1,3 +1,9 @@
+export interface ICommandExecutionResults {
+    readonly stderr: string;
+
+    readonly stdout: string;
+}
+
 export interface ICommandExecutionErrorOptions extends ErrorOptions {
     readonly code: number;
 
@@ -36,24 +42,29 @@ export async function doesPathExist(path: string | URL): Promise<boolean> {
 export async function exec(
     filePath: string,
     ...args: string[]
-): Promise<string> {
+): Promise<ICommandExecutionResults> {
     const command = new Deno.Command(filePath, {
         args,
     });
 
     const { code, stderr, stdout } = await command.output();
+
     const textDecoder = new TextDecoder();
+    const stderrMessage = textDecoder.decode(stderr);
 
     if (code !== 0) {
-        const message = textDecoder.decode(stderr);
-
         throw new CommandExecutionError(
             `bad argument(s) #0,#1 to 'exec' (command returned non-zero status code '${code}')`,
-            { code, stderr: message },
+            { code, stderr: stderrMessage },
         );
     }
 
-    return textDecoder.decode(stdout);
+    const stdoutMessage = textDecoder.decode(stdout);
+
+    return {
+        stderr: stderrMessage,
+        stdout: stdoutMessage,
+    };
 }
 
 export function pairElements<T>(array: T[]): T[][] {
