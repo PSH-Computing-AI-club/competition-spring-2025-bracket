@@ -25,6 +25,17 @@ const { computeBracket, matchesBestOf, seed, suddenDeathMax } = makeBracket({
 
 const bracketResults = await computeBracket();
 
-const runResults = bracketResults satisfies IRunResults;
+const runResults = {
+    matchesBestOf,
+    // **HACK:** The type of `seed` is `bigint`. JSON only natively supports storing
+    // number values that are equal to or less than `Number.MAX_SAFE_INTEGER`.
+    //
+    // So we need to manually serialize the seed as a string and special case parsing
+    // the value.
+    seed: seed.toString(),
+    suddenDeathMax,
+
+    ...bracketResults,
+} satisfies IRunResults;
 
 console.log(JSON.stringify(runResults, null, 4));

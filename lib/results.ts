@@ -1,6 +1,12 @@
 import type { ICompetitor } from './competitor.ts';
 
 export interface IRunResults {
+    readonly matchesBestOf: number;
+
+    readonly seed: string;
+
+    readonly suddenDeathMax: number;
+
     readonly rounds: {
         readonly pairs: {
             readonly competitorA: ICompetitor;
