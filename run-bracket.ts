@@ -2,6 +2,7 @@ import { join } from '@std/path';
 
 import { makeBracket } from './lib/bracket.ts';
 import { transformCompetitorData } from './lib/competitor.ts';
+import type { IRunResults } from './lib/results.ts';
 import { generateDaySeed, RUN_IDENTIFIER } from './lib/util.ts';
 
 import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
@@ -16,7 +17,7 @@ await Deno.mkdir(DIRECTORY_OUTPUT, { recursive: true });
 
 const COMPETITORS = await transformCompetitorData(COMPETITOR_MANIFEST);
 
-const bracket = makeBracket({
+const { computeBracket, matchesBestOf, seed, suddenDeathMax } = makeBracket({
     competitors: COMPETITORS,
     logPath: DIRECTORY_GAME_LOGS,
     matchesBestOf: 5,
@@ -24,6 +25,8 @@ const bracket = makeBracket({
     suddenDeathMax: 3,
 });
 
-const results = await bracket.computeBracket();
+const bracketResults = await computeBracket();
 
-console.log({ results });
+const runResults = bracketResults satisfies IRunResults;
+
+console.log(JSON.stringify(runResults, null, 4));
