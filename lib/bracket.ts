@@ -50,9 +50,11 @@ export interface IBracketRound {
 }
 
 export interface IBracketResults {
+    readonly finalist: ICompetitor;
+
     readonly rounds: IBracketRound[];
 
-    readonly winner: ICompetitor;
+    readonly semiFinalist: ICompetitor;
 }
 
 export interface IBracketOptions {
@@ -279,6 +281,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
             const rounds: IBracketRound[] = [];
 
             let currentRoundCompetitors = shuffle(competitors, { prng });
+            let finalPair: IBracketPair | null = null;
 
             for (let roundIndex = 0; roundIndex < maxRounds; roundIndex++) {
                 const currentRound = await computeRound(
@@ -290,6 +293,10 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
                 rounds.push(currentRound);
 
+                if (roundIndex === maxRounds - 1 && pairs.length === 1) {
+                    finalPair = pairs[0];
+                }
+
                 currentRoundCompetitors = pairs
                     .map((pair) => {
                         const { winner } = pair;
@@ -298,9 +305,15 @@ export function makeBracket(options: IBracketOptions): IBracket {
                     });
             }
 
+            const { competitorA, competitorB, winner: finalist } = finalPair!;
+            const semiFinalist = finalist === competitorA
+                ? competitorB
+                : competitorA;
+
             return {
+                finalist,
                 rounds,
-                winner: currentRoundCompetitors[0],
+                semiFinalist,
             };
         },
     };

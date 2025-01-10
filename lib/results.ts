@@ -12,9 +12,13 @@ import type { ICompetitor } from './competitor.ts';
 export interface IRunResults {
     readonly competitors: ICompetitor[];
 
+    readonly finalist: string;
+
     readonly matchesBestOf: number;
 
     readonly seed: string;
+
+    readonly semiFinalist: string;
 
     readonly suddenDeathMax: number;
 
@@ -47,8 +51,6 @@ export interface IRunResults {
 
         readonly roundIndex: number;
     }[];
-
-    readonly winner: string;
 }
 
 function transformMatches(
@@ -119,7 +121,7 @@ export function transformBracketResults(
     bracketResults: IBracketResults,
 ): IRunResults {
     const { competitors, matchesBestOf, seed, suddenDeathMax } = bracket;
-    const { rounds, winner } = bracketResults;
+    const { finalist, rounds, semiFinalist } = bracketResults;
 
     return {
         competitors: competitors.map((competitor) => {
@@ -149,7 +151,9 @@ export function transformBracketResults(
         seed: seed.toString(),
         suddenDeathMax,
 
-        winner: winner.name,
+        semiFinalist: semiFinalist.name,
+        finalist: finalist.name,
+
         rounds: transformRounds(rounds),
     };
 }
