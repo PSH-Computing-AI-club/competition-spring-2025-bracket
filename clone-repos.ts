@@ -15,7 +15,9 @@ await Promise.all(
         .map(async (competitor) => {
             const { repository, repositoryDirectory } = competitor;
 
-            const output = await exec(
+            // **HACK:** `git clone` reports progress to stderr _even if successful_.
+
+            const { stderr } = await exec(
                 'git',
                 'clone',
                 '--progress',
@@ -23,6 +25,6 @@ await Promise.all(
                 repositoryDirectory,
             );
 
-            console.log(output);
+            console.log(stderr);
         }),
 );
