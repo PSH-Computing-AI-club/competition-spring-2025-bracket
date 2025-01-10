@@ -4,6 +4,7 @@ import { transformBracketResults } from './lib/results.ts';
 import {
     DIRECTORY_GAME_LOGS,
     DIRECTORY_RUN_OUTPUT,
+    FILE_RUN_LOG,
     generateRunSeed,
 } from './lib/run.ts';
 
@@ -24,4 +25,6 @@ const bracket = makeBracket({
 const bracketResults = await bracket.computeBracket();
 const runResults = transformBracketResults(bracket, bracketResults);
 
-console.log(JSON.stringify(runResults, null, 4));
+const serializedResults = JSON.stringify(runResults);
+
+await Deno.writeTextFile(FILE_RUN_LOG, serializedResults);

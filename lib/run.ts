@@ -22,6 +22,8 @@ export const DIRECTORY_RUN_OUTPUT = `./dist/output/${RUN_IDENTIFIER}`;
 
 export const DIRECTORY_GAME_LOGS = join(DIRECTORY_RUN_OUTPUT, 'game-logs');
 
+export const FILE_RUN_LOG = join(DIRECTORY_RUN_OUTPUT, 'bracket.json');
+
 export function generateRunSeed(): bigint {
     const { nanoseconds } = Temporal
         .Now
