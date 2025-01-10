@@ -1,0 +1,338 @@
+{
+    "competitors": [
+        {
+            "name": "test-player-1",
+            "playerFile": "test-player-1/mod.js",
+            "repository": "https://github.com/.../..."
+        },
+        {
+            "name": "test-player-2",
+            "playerFile": "test-player-2/mod.js",
+            "repository": "https://github.com/.../..."
+        },
+        {
+            "name": "test-player-3",
+            "playerFile": "test-player-3/mod.js",
+            "repository": "https://github.com/.../..."
+        },
+        {
+            "name": "test-player-4",
+            "playerFile": "test-player-4/mod.js",
+            "repository": "https://github.com/.../..."
+        },
+        {
+            "name": "test-player-5",
+            "playerFile": "test-player-5/mod.js",
+            "repository": "https://github.com/.../..."
+        },
+        {
+            "name": "test-player-6",
+            "playerFile": "test-player-6/mod.js",
+            "repository": "https://github.com/.../..."
+        },
+        {
+            "name": "test-player-7",
+            "playerFile": "test-player-7/mod.js",
+            "repository": "https://github.com/.../..."
+        },
+        {
+            "name": "test-player-8",
+            "playerFile": "test-player-8/mod.js",
+            "repository": "https://github.com/.../..."
+        }
+    ],
+    "matchesBestOf": 5,
+    "seed": "1736467200000000000",
+    "suddenDeathMax": 3,
+    "firstPlace": "test-player-6",
+    "secondPlace": "test-player-3",
+    "rounds": [
+        {
+            "roundIndex": 0,
+            "pairs": [
+                {
+                    "competitorA": "test-player-8",
+                    "competitorB": "test-player-3",
+                    "pairIndex": 0,
+                    "winner": "test-player-3",
+                    "matches": [
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 0,
+                            "playerA": "test-player-3",
+                            "playerB": "test-player-8",
+                            "seed": 8660265931374592,
+                            "winner": "test-player-3"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 1,
+                            "playerA": "test-player-8",
+                            "playerB": "test-player-3",
+                            "seed": 6018219913510912,
+                            "winner": "test-player-3"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 2,
+                            "playerA": "test-player-8",
+                            "playerB": "test-player-3",
+                            "seed": 5404872073543680,
+                            "winner": "test-player-3"
+                        }
+                    ]
+                },
+                {
+                    "competitorA": "test-player-5",
+                    "competitorB": "test-player-7",
+                    "pairIndex": 1,
+                    "winner": "test-player-7",
+                    "matches": [
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 0,
+                            "playerA": "test-player-7",
+                            "playerB": "test-player-5",
+                            "seed": 3809397295808512,
+                            "winner": "test-player-5"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 1,
+                            "playerA": "test-player-7",
+                            "playerB": "test-player-5",
+                            "seed": 2341600453722112,
+                            "winner": "test-player-7"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 2,
+                            "playerA": "test-player-5",
+                            "playerB": "test-player-7",
+                            "seed": 1797325336870912,
+                            "winner": "test-player-7"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 3,
+                            "playerA": "test-player-5",
+                            "playerB": "test-player-7",
+                            "seed": 3102040618172416,
+                            "winner": "test-player-7"
+                        }
+                    ]
+                },
+                {
+                    "competitorA": "test-player-2",
+                    "competitorB": "test-player-1",
+                    "pairIndex": 2,
+                    "winner": "test-player-2",
+                    "matches": [
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 0,
+                            "playerA": "test-player-2",
+                            "playerB": "test-player-1",
+                            "seed": 251153619091456,
+                            "winner": "test-player-2"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 1,
+                            "playerA": "test-player-1",
+                            "playerB": "test-player-2",
+                            "seed": 3822703372926976,
+                            "winner": "test-player-2"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 2,
+                            "playerA": "test-player-1",
+                            "playerB": "test-player-2",
+                            "seed": 8938980202512384,
+                            "winner": "test-player-1"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 3,
+                            "playerA": "test-player-2",
+                            "playerB": "test-player-1",
+                            "seed": 1423333281234944,
+                            "winner": "test-player-2"
+                        }
+                    ]
+                },
+                {
+                    "competitorA": "test-player-4",
+                    "competitorB": "test-player-6",
+                    "pairIndex": 3,
+                    "winner": "test-player-6",
+                    "matches": [
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 0,
+                            "playerA": "test-player-6",
+                            "playerB": "test-player-4",
+                            "seed": 1131395938254848,
+                            "winner": "test-player-6"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 1,
+                            "playerA": "test-player-4",
+                            "playerB": "test-player-6",
+                            "seed": 7072536254742528,
+                            "winner": "test-player-6"
+                        },
+                        {
+                            "gridColumns": 5,
+                            "gridRows": 3,
+                            "matchIndex": 2,
+                            "playerA": "test-player-4",
+                            "playerB": "test-player-6",
+                            "seed": 4303442010963968,
+                            "winner": "test-player-6"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "roundIndex": 1,
+            "pairs": [
+                {
+                    "competitorA": "test-player-3",
+                    "competitorB": "test-player-7",
+                    "pairIndex": 0,
+                    "winner": "test-player-3",
+                    "matches": [
+                        {
+                            "gridColumns": 6,
+                            "gridRows": 4,
+                            "matchIndex": 0,
+                            "playerA": "test-player-7",
+                            "playerB": "test-player-3",
+                            "seed": 1306356667645952,
+                            "winner": "test-player-7"
+                        },
+                        {
+                            "gridColumns": 6,
+                            "gridRows": 4,
+                            "matchIndex": 1,
+                            "playerA": "test-player-3",
+                            "playerB": "test-player-7",
+                            "seed": 1924280925290496,
+                            "winner": "test-player-3"
+                        },
+                        {
+                            "gridColumns": 6,
+                            "gridRows": 4,
+                            "matchIndex": 2,
+                            "playerA": "test-player-7",
+                            "playerB": "test-player-3",
+                            "seed": 4818395807612928,
+                            "winner": "test-player-3"
+                        },
+                        {
+                            "gridColumns": 6,
+                            "gridRows": 4,
+                            "matchIndex": 3,
+                            "playerA": "test-player-7",
+                            "playerB": "test-player-3",
+                            "seed": 1064106035511296,
+                            "winner": "test-player-3"
+                        }
+                    ]
+                },
+                {
+                    "competitorA": "test-player-2",
+                    "competitorB": "test-player-6",
+                    "pairIndex": 1,
+                    "winner": "test-player-6",
+                    "matches": [
+                        {
+                            "gridColumns": 6,
+                            "gridRows": 4,
+                            "matchIndex": 0,
+                            "playerA": "test-player-6",
+                            "playerB": "test-player-2",
+                            "seed": 1287118661877760,
+                            "winner": "test-player-6"
+                        },
+                        {
+                            "gridColumns": 6,
+                            "gridRows": 4,
+                            "matchIndex": 1,
+                            "playerA": "test-player-2",
+                            "playerB": "test-player-6",
+                            "seed": 3312230821003264,
+                            "winner": "test-player-6"
+                        },
+                        {
+                            "gridColumns": 6,
+                            "gridRows": 4,
+                            "matchIndex": 2,
+                            "playerA": "test-player-2",
+                            "playerB": "test-player-6",
+                            "seed": 6121173756674048,
+                            "winner": "test-player-6"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "roundIndex": 2,
+            "pairs": [
+                {
+                    "competitorA": "test-player-3",
+                    "competitorB": "test-player-6",
+                    "pairIndex": 0,
+                    "winner": "test-player-6",
+                    "matches": [
+                        {
+                            "gridColumns": 7,
+                            "gridRows": 5,
+                            "matchIndex": 0,
+                            "playerA": "test-player-6",
+                            "playerB": "test-player-3",
+                            "seed": 5713904495755264,
+                            "winner": "test-player-6"
+                        },
+                        {
+                            "gridColumns": 7,
+                            "gridRows": 5,
+                            "matchIndex": 1,
+                            "playerA": "test-player-3",
+                            "playerB": "test-player-6",
+                            "seed": 6559493783552000,
+                            "winner": "test-player-6"
+                        },
+                        {
+                            "gridColumns": 7,
+                            "gridRows": 5,
+                            "matchIndex": 2,
+                            "playerA": "test-player-3",
+                            "playerB": "test-player-6",
+                            "seed": 619823675473920,
+                            "winner": "test-player-6"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

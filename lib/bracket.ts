@@ -50,11 +50,11 @@ export interface IBracketRound {
 }
 
 export interface IBracketResults {
-    readonly finalist: ICompetitor;
+    readonly firstPlace: ICompetitor;
+
+    readonly secondPlace: ICompetitor;
 
     readonly rounds: IBracketRound[];
-
-    readonly semiFinalist: ICompetitor;
 }
 
 export interface IBracketOptions {
@@ -305,15 +305,15 @@ export function makeBracket(options: IBracketOptions): IBracket {
                     });
             }
 
-            const { competitorA, competitorB, winner: finalist } = finalPair!;
-            const semiFinalist = finalist === competitorA
+            const { competitorA, competitorB, winner: firstPlace } = finalPair!;
+            const secondPlace = firstPlace === competitorA
                 ? competitorB
                 : competitorA;
 
             return {
-                finalist,
+                firstPlace,
                 rounds,
-                semiFinalist,
+                secondPlace,
             };
         },
     };
