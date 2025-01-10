@@ -57,6 +57,8 @@ export interface IBracketResults {
     readonly rounds: IBracketRound[];
 
     readonly thirdPlace: ICompetitor;
+
+    readonly thirdPlacePair: IBracketPair;
 }
 
 export interface IBracketOptions {
@@ -339,7 +341,8 @@ export function makeBracket(options: IBracketOptions): IBracket {
                 firstPlace,
                 rounds,
                 secondPlace,
-                thirdPlace: thirdPlace!,
+                thirdPlace,
+                thirdPlacePair,
             };
         },
     };

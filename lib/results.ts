@@ -53,6 +53,32 @@ export interface IRunResults {
 
         readonly roundIndex: number;
     }[];
+
+    readonly thirdPlacePair: {
+        readonly competitorA: string;
+
+        readonly competitorB: string;
+
+        readonly matches: {
+            readonly gridColumns: number;
+
+            readonly gridRows: number;
+
+            readonly matchIndex: number;
+
+            readonly playerA: string;
+
+            readonly playerB: string;
+
+            readonly seed: number;
+
+            readonly winner: string | null;
+        }[];
+
+        readonly pairIndex: number;
+
+        readonly winner: string;
+    };
 }
 
 function transformMatches(
@@ -123,7 +149,8 @@ export function transformBracketResults(
     bracketResults: IBracketResults,
 ): IRunResults {
     const { competitors, matchesBestOf, seed, suddenDeathMax } = bracket;
-    const { firstPlace, rounds, secondPlace, thirdPlace } = bracketResults;
+    const { firstPlace, rounds, secondPlace, thirdPlace, thirdPlacePair } =
+        bracketResults;
 
     return {
         matchesBestOf,
@@ -159,5 +186,6 @@ export function transformBracketResults(
         }),
 
         rounds: transformRounds(rounds),
+        thirdPlacePair: transformPairs([thirdPlacePair])[0],
     };
 }
