@@ -11,9 +11,9 @@ export interface IRunResults {
 
     readonly rounds: {
         readonly pairs: {
-            readonly competitorA: ICompetitor;
+            readonly competitorA: string;
 
-            readonly competitorB: ICompetitor;
+            readonly competitorB: string;
 
             readonly matches: {
                 readonly gridColumns: number;
@@ -22,22 +22,22 @@ export interface IRunResults {
 
                 readonly matchIndex: number;
 
-                readonly playerA: ICompetitor;
+                readonly playerA: string;
 
-                readonly playerB: ICompetitor;
+                readonly playerB: string;
 
                 readonly seed: number;
 
-                readonly winner: ICompetitor | null;
+                readonly winner: string | null;
             }[];
 
             readonly pairIndex: number;
 
-            readonly winner: ICompetitor;
+            readonly winner: string;
         }[];
 
         readonly roundIndex: number;
     }[];
 
-    readonly winner: ICompetitor;
+    readonly winner: string;
 }

@@ -50,7 +50,57 @@ const runResults = {
     seed: seed.toString(),
     suddenDeathMax,
 
-    ...bracketResults,
+    winner: bracketResults.winner.name,
+
+    rounds: bracketResults
+        .rounds
+        .map((round) => {
+            const { pairs, roundIndex } = round;
+
+            return {
+                roundIndex,
+                pairs: pairs
+                    .map((pair) => {
+                        const {
+                            competitorA,
+                            competitorB,
+                            matches,
+                            pairIndex,
+                            winner,
+                        } = pair;
+
+                        return {
+                            competitorA: competitorA.name,
+                            competitorB: competitorB.name,
+                            pairIndex,
+                            winner: winner.name,
+
+                            matches: matches
+                                .map((match) => {
+                                    const {
+                                        gridColumns,
+                                        gridRows,
+                                        matchIndex,
+                                        playerA,
+                                        playerB,
+                                        seed,
+                                        winner,
+                                    } = match;
+
+                                    return {
+                                        gridColumns,
+                                        gridRows,
+                                        matchIndex,
+                                        playerA: playerA.name,
+                                        playerB: playerB.name,
+                                        seed,
+                                        winner: winner?.name ?? null,
+                                    };
+                                }),
+                        };
+                    }),
+            };
+        }),
 } satisfies IRunResults;
 
 console.log(JSON.stringify(runResults, null, 4));
