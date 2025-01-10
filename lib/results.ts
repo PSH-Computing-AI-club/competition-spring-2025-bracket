@@ -124,6 +124,19 @@ export function transformBracketResults(
     const { firstPlace, rounds, secondPlace } = bracketResults;
 
     return {
+        matchesBestOf,
+
+        // **HACK:** The type of `seed` is `bigint`. JSON only natively supports storing
+        // number values that are equal to or less than `Number.MAX_SAFE_INTEGER`.
+        //
+        // So we need to manually serialize the seed as a string and special case parsing
+        // the value.
+        seed: seed.toString(),
+        suddenDeathMax,
+
+        firstPlace: firstPlace.name,
+        secondPlace: secondPlace.name,
+
         competitors: competitors.map((competitor) => {
             const { name, playerFile, repository } = competitor;
 
@@ -141,18 +154,6 @@ export function transformBracketResults(
                 repository,
             };
         }),
-        matchesBestOf,
-
-        // **HACK:** The type of `seed` is `bigint`. JSON only natively supports storing
-        // number values that are equal to or less than `Number.MAX_SAFE_INTEGER`.
-        //
-        // So we need to manually serialize the seed as a string and special case parsing
-        // the value.
-        seed: seed.toString(),
-        suddenDeathMax,
-
-        firstPlace: firstPlace.name,
-        secondPlace: secondPlace.name,
 
         rounds: transformRounds(rounds),
     };
