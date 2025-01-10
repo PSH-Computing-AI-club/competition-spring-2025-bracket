@@ -111,6 +111,9 @@ export function makeBracket(options: IBracketOptions): IBracket {
     const maxRounds = computeMaxRounds(competitors.length);
     const matchesWinCount = Math.ceil(matchesBestOf / 2);
 
+    const finalRoundIndex = maxRounds - 1;
+    const semiFinalRoundIndex = finalRoundIndex - 1;
+
     const prng = randomSeeded(seed);
 
     async function computeMatch(
@@ -298,11 +301,11 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
                 rounds.push(currentRound);
 
-                if (roundIndex === maxRounds - 1) {
+                if (roundIndex === finalRoundIndex) {
                     finalPair = pairs[0];
                 }
 
-                if (roundIndex === maxRounds - 2) {
+                if (roundIndex === semiFinalRoundIndex) {
                     thirdPlaceLosers = pairs.map((pair) => {
                         const { competitorA, competitorB, winner } = pair;
 
@@ -331,7 +334,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
             const thirdPlacePair = await computePair(
                 thirdPlaceCompetitorA,
                 thirdPlaceCompetitorB,
-                maxRounds - 1,
+                finalRoundIndex,
                 1,
             );
 
