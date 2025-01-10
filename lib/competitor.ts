@@ -1,4 +1,5 @@
 import { join } from '@std/path';
+import slug from 'slug';
 
 import { doesPathExist } from './util.ts';
 
@@ -15,6 +16,8 @@ export interface ICompetitorData {
 }
 
 export interface ICompetitor {
+    readonly identifier: string;
+
     readonly name: string;
 
     readonly playerFile: string;
@@ -30,17 +33,18 @@ export function transformCompetitorData(
             .map(async (competitor) => {
                 const { name, repository } = competitor;
 
+                const identifier = slug(name) as string;
                 const repositoryURL = new URL(repository);
 
                 const javascriptPlayerFile = join(
                     DIRECTORY_COMPETITOR_REPOSITORIES,
-                    name,
+                    identifier,
                     FILE_PLAYER_JAVASCRIPT,
                 );
 
                 const typescriptPlayerFile = join(
                     DIRECTORY_COMPETITOR_REPOSITORIES,
-                    name,
+                    identifier,
                     FILE_PLAYER_TYPESCRIPT,
                 );
 
@@ -49,6 +53,7 @@ export function transformCompetitorData(
                     : javascriptPlayerFile;
 
                 return {
+                    identifier,
                     name,
                     playerFile,
                     repository: repositoryURL,

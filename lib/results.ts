@@ -168,7 +168,7 @@ export function transformBracketResults(
         thirdPlace: thirdPlace.name,
 
         competitors: competitors.map((competitor) => {
-            const { name, playerFile, repository } = competitor;
+            const { identifier, name, playerFile, repository } = competitor;
 
             const playerBaseName = basename(playerFile);
             const playerDirectoryName = basename(dirname(playerFile));
@@ -179,6 +179,7 @@ export function transformBracketResults(
             );
 
             return {
+                identifier,
                 name,
                 playerFile: correctedPlayerFile,
                 repository,

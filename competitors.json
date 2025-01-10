@@ -1,41 +1,41 @@
 [
     {
-        "name": "test-player-1",
+        "name": "Test Player #1",
         "repository": "https://github.com/.../..."
     },
 
     {
-        "name": "test-player-2",
+        "name": "Test Player #2",
         "repository": "https://github.com/.../..."
     },
 
     {
-        "name": "test-player-3",
+        "name": "Test Player #3",
         "repository": "https://github.com/.../..."
     },
 
     {
-        "name": "test-player-4",
+        "name": "Test Player #4",
         "repository": "https://github.com/.../..."
     },
 
     {
-        "name": "test-player-5",
+        "name": "Test Player #5",
         "repository": "https://github.com/.../..."
     },
 
     {
-        "name": "test-player-6",
+        "name": "Test Player #6",
         "repository": "https://github.com/.../..."
     },
 
     {
-        "name": "test-player-7",
+        "name": "Test Player #7",
         "repository": "https://github.com/.../..."
     },
 
     {
-        "name": "test-player-8",
+        "name": "Test Player #8",
         "repository": "https://github.com/.../..."
     }
 ]
