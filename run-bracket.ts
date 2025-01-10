@@ -7,8 +7,6 @@ import { generateDaySeed, RUN_IDENTIFIER } from './lib/util.ts';
 
 import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
 
-const SEED = generateDaySeed();
-
 const DIRECTORY_OUTPUT = `./dist/output/${RUN_IDENTIFIER}`;
 
 const DIRECTORY_GAME_LOGS = join(DIRECTORY_OUTPUT, 'game-logs');
@@ -21,7 +19,7 @@ const { computeBracket, matchesBestOf, seed, suddenDeathMax } = makeBracket({
     competitors: COMPETITORS,
     logPath: DIRECTORY_GAME_LOGS,
     matchesBestOf: 5,
-    seed: SEED,
+    seed: generateDaySeed(),
     suddenDeathMax: 3,
 });
 
