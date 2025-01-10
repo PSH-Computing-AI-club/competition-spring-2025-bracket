@@ -1,4 +1,4 @@
-import { join } from '@std/path';
+import { basename, dirname, join } from '@std/path';
 
 import { makeBracket } from './lib/bracket.ts';
 import { transformCompetitorData } from './lib/competitor.ts';
@@ -26,7 +26,20 @@ const { computeBracket, matchesBestOf, seed, suddenDeathMax } = makeBracket({
 const bracketResults = await computeBracket();
 
 const runResults = {
-    competitors: COMPETITORS,
+    competitors: COMPETITORS.map((competitor) => {
+        const { name, playerFile, repository } = competitor;
+
+        const playerBaseName = basename(playerFile);
+        const playerDirectoryName = basename(dirname(playerFile));
+
+        const correctedPlayerFile = join(playerDirectoryName, playerBaseName);
+
+        return {
+            name,
+            playerFile: correctedPlayerFile,
+            repository,
+        };
+    }),
     matchesBestOf,
 
     // **HACK:** The type of `seed` is `bigint`. JSON only natively supports storing
