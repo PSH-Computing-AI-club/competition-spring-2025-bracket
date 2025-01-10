@@ -55,6 +55,8 @@ export interface IBracketResults {
     readonly secondPlace: ICompetitor;
 
     readonly rounds: IBracketRound[];
+
+    readonly thirdPlace: ICompetitor;
 }
 
 export interface IBracketOptions {
@@ -282,6 +284,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
             let currentRoundCompetitors = shuffle(competitors, { prng });
             let finalPair: IBracketPair | null = null;
+            let thirdPlaceLosers: ICompetitor[] | null = null;
 
             for (let roundIndex = 0; roundIndex < maxRounds; roundIndex++) {
                 const currentRound = await computeRound(
@@ -297,6 +300,16 @@ export function makeBracket(options: IBracketOptions): IBracket {
                     finalPair = pairs[0];
                 }
 
+                if (roundIndex === maxRounds - 2) {
+                    thirdPlaceLosers = pairs.map((pair) => {
+                        const { competitorA, competitorB, winner } = pair;
+
+                        return winner === competitorA
+                            ? competitorB
+                            : competitorA;
+                    });
+                }
+
                 currentRoundCompetitors = pairs
                     .map((pair) => {
                         const { winner } = pair;
@@ -310,10 +323,23 @@ export function makeBracket(options: IBracketOptions): IBracket {
                 ? competitorB
                 : competitorA;
 
+            const [thirdPlaceCompetitorA, thirdPlaceCompetitorB] =
+                thirdPlaceLosers!;
+
+            const thirdPlacePair = await computePair(
+                thirdPlaceCompetitorA,
+                thirdPlaceCompetitorB,
+                maxRounds - 1,
+                1,
+            );
+
+            const { winner: thirdPlace } = thirdPlacePair;
+
             return {
                 firstPlace,
                 rounds,
                 secondPlace,
+                thirdPlace: thirdPlace!,
             };
         },
     };

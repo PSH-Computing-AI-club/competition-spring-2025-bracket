@@ -22,6 +22,8 @@ export interface IRunResults {
 
     readonly suddenDeathMax: number;
 
+    readonly thirdPlace: string;
+
     readonly rounds: {
         readonly pairs: {
             readonly competitorA: string;
@@ -121,7 +123,7 @@ export function transformBracketResults(
     bracketResults: IBracketResults,
 ): IRunResults {
     const { competitors, matchesBestOf, seed, suddenDeathMax } = bracket;
-    const { firstPlace, rounds, secondPlace } = bracketResults;
+    const { firstPlace, rounds, secondPlace, thirdPlace } = bracketResults;
 
     return {
         matchesBestOf,
@@ -136,6 +138,7 @@ export function transformBracketResults(
 
         firstPlace: firstPlace.name,
         secondPlace: secondPlace.name,
+        thirdPlace: thirdPlace.name,
 
         competitors: competitors.map((competitor) => {
             const { name, playerFile, repository } = competitor;
