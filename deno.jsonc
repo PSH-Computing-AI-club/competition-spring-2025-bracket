@@ -3,6 +3,7 @@
         "@std/path": "jsr:@std/path@^1.0.8",
         "@std/random": "jsr:@std/random@^0.1.0",
         "preact": "npm:preact@^10.25.4",
+        "preact-render-to-string": "npm:preact-render-to-string@^6.5.12",
         "slug": "npm:slug@^10.0.0"
     },
 

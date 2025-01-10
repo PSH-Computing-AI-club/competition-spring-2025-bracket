@@ -3,6 +3,7 @@
     "specifiers": {
         "jsr:@std/path@^1.0.8": "1.0.8",
         "jsr:@std/random@0.1": "0.1.0",
+        "npm:preact-render-to-string@^6.5.12": "6.5.12_preact@10.25.4",
         "npm:preact@^10.25.4": "10.25.4",
         "npm:slug@10": "10.0.0"
     },
@@ -15,6 +16,12 @@
         }
     },
     "npm": {
+        "preact-render-to-string@6.5.12_preact@10.25.4": {
+            "integrity": "sha512-FpU7/cRipZo4diSWQq7gZWVp+Px76CtVduJZNvQwVzynDsAIxKteMrjCCGPbM2oEasReoDffaeMCMlaur9ohIg==",
+            "dependencies": [
+                "preact"
+            ]
+        },
         "preact@10.25.4": {
             "integrity": "sha512-jLdZDb+Q+odkHJ+MpW/9U5cODzqnB+fy2EiHSZES7ldV5LK7yjlVzTp7R8Xy6W6y75kfK8iWYtFVH7lvjwrCMA=="
         },
@@ -26,6 +33,7 @@
         "dependencies": [
             "jsr:@std/path@^1.0.8",
             "jsr:@std/random@0.1",
+            "npm:preact-render-to-string@^6.5.12",
             "npm:preact@^10.25.4",
             "npm:slug@10"
         ]
