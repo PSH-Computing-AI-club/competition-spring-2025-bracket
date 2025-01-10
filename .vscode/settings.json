@@ -2,11 +2,6 @@
     "deno.enable": true,
     "deno.lint": true,
 
-    "[javascript]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "denoland.vscode-deno"
-    },
-
     "[json]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "denoland.vscode-deno"
