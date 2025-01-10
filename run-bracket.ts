@@ -2,7 +2,7 @@ import { makeBracket } from './lib/bracket.ts';
 import { transformCompetitorData } from './lib/competitor.ts';
 import { transformBracketResults } from './lib/results.ts';
 import {
-    DIRECTORY_GAME_LOGS,
+    DIRECTORY_MATCH_LOGS,
     DIRECTORY_RUN_OUTPUT,
     FILE_RUN_LOG,
     generateRunSeed,
@@ -16,7 +16,7 @@ const COMPETITORS = await transformCompetitorData(COMPETITOR_MANIFEST);
 
 const bracket = makeBracket({
     competitors: COMPETITORS,
-    logPath: DIRECTORY_GAME_LOGS,
+    logPath: DIRECTORY_MATCH_LOGS,
     matchesBestOf: 5,
     seed: generateRunSeed(),
     suddenDeathMax: 3,

@@ -20,7 +20,7 @@ export const RUN_IDENTIFIER = `${NOW.year}-${
 
 export const DIRECTORY_RUN_OUTPUT = `./dist/output/${RUN_IDENTIFIER}`;
 
-export const DIRECTORY_GAME_LOGS = join(DIRECTORY_RUN_OUTPUT, 'game-logs');
+export const DIRECTORY_MATCH_LOGS = join(DIRECTORY_RUN_OUTPUT, 'match-logs');
 
 export const FILE_RUN_LOG = join(DIRECTORY_RUN_OUTPUT, 'bracket.json');
 

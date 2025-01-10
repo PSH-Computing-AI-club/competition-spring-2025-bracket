@@ -5,7 +5,7 @@ import type { ICompetitor } from './competitor.ts';
 import { simulate } from './simulation.ts';
 import { pairElements } from './util.ts';
 
-const FILE_GAME_LOG = (
+const TEMPLATE_FILE_MATCH_LOG = (
     { matchIndex, pairIndex, roundIndex }: {
         matchIndex: number;
         pairIndex: number;
@@ -136,7 +136,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
         const logFilePath = join(
             logPath,
-            FILE_GAME_LOG({ matchIndex, pairIndex, roundIndex }),
+            TEMPLATE_FILE_MATCH_LOG({ matchIndex, pairIndex, roundIndex }),
         );
 
         const winner = await simulate(
