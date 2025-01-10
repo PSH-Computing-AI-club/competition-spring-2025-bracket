@@ -41,7 +41,7 @@ export async function exec(
         args,
     });
 
-    const { code, stdout, stderr } = await command.output();
+    const { code, stderr, stdout } = await command.output();
     const textDecoder = new TextDecoder();
 
     if (code !== 0) {
