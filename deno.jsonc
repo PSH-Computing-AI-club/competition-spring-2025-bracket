@@ -32,6 +32,8 @@
 
     "tasks": {
         "check": "deno task check:format;deno task check:types;deno task check:lint",
+        "bracket:clone": "deno run --allow-read --allow-run ./clone-repos.ts",
+        "bracket:run": "deno run --allow-read --allow-run --allow-write ./run-bracket.ts",
         "check:format": "deno fmt --check ./",
         "check:lint": "deno lint ./",
         "check:types": "deno check ./",
