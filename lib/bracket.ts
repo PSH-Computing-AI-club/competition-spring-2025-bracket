@@ -293,7 +293,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
 
                 rounds.push(currentRound);
 
-                if (roundIndex === maxRounds - 1 && pairs.length === 1) {
+                if (roundIndex === maxRounds - 1) {
                     finalPair = pairs[0];
                 }
 
