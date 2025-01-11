@@ -1,0 +1,102 @@
+:root {
+    --bracket--competitor--loser-background: color-mix(
+        in hsl,
+        tomato,
+        white 65%
+    );
+    --bracket--competitor--loser-olor: color-mix(
+        in hsl,
+        tomato,
+        white 15%
+    );
+
+    --bracket--competitor--winner-background: color-mix(
+        in hsl,
+        springgreen,
+        white 45%
+    );
+
+    --bracket--line-size: 1px;
+
+    --bracket--pair-spacing: 5rem;
+}
+
+body {
+    background-color: white;
+    color: black;
+    font-family:
+        ui-rounded,
+        'Hiragino Maru Gothic ProN',
+        Quicksand,
+        Comfortaa,
+        Manjari,
+        'Arial Rounded MT',
+        'Arial Rounded MT Bold',
+        Calibri,
+        source-sans-pro,
+        sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+main {
+    display: flex;
+}
+
+.bracket {
+    list-style: none;
+
+    display: flex;
+    flex-grow: 1;
+
+    padding: 0;
+}
+
+.bracket--round {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    justify-content: center;
+}
+
+.bracket--round::before,
+.bracket--round::after {
+    display: block;
+    content: ' ';
+
+    flex-grow: 0.5;
+}
+
+.bracket--competitor:not([data-is-bottom-competitor]) {
+    border-bottom: var(--bracket--line-size) solid currentColor;
+}
+
+.bracket--competitor[data-is-bottom-competitor] {
+    border-top: var(--bracket--line-size) solid currentColor;
+}
+
+.bracket--competitor:not([data-is-winner]) {
+    background-color: var(--bracket--competitor--loser-background);
+    color: var(--bracket--competitor--loser-color);
+}
+
+.bracket--competitor[data-is-winner] {
+    background-color: var(--bracket--competitor--winner-background);
+    color: var(--bracket--competitor--winner-color);
+}
+
+.bracket--competitor-text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bracket--spacer {
+    flex-grow: 1;
+}
+
+.bracket--spacer[data-is-pair-spacer] {
+    min-height: var(--bracket--pair-spacing);
+
+    border-right: var(--bracket--line-size) solid currentColor;
+}
