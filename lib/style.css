@@ -11,7 +11,7 @@
     --bracket--competitor--loser-background: color-mix(
         in hsl,
         tomato,
-        white 65%
+        white 70%
     );
     --bracket--competitor--loser-color: color-mix(
         in hsl,
@@ -135,6 +135,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .bracket--competitor[data-is-bottom-competitor] {
     border-top: 1px solid currentColor;
+}
+
+.bracket--competitor-icon {
+    padding: 0.5em;
 }
 
 .bracket--competitor:not([data-is-winner]) > .bracket--competitor-icon {
