@@ -21,13 +21,13 @@
 
     --bracket--competitor--winner-background: color-mix(
         in hsl,
-        springgreen,
-        var(--main-background) 82.5%
+        seagreen,
+        var(--main-background) 80%
     );
     --bracket--competitor--winner-color: color-mix(
         in hsl,
-        springgreen,
-        white 45%
+        seagreen,
+        white 20%
     );
 
     --bracket--competitor--first-place-background: color-mix(
@@ -191,11 +191,11 @@ header > h2 {
 }
 
 .bracket--competitor[data-is-competitor-a] {
-    border-bottom: 1px solid currentColor;
+    border-bottom: 2px solid currentColor;
 }
 
 .bracket--competitor[data-is-competitor-b] {
-    border-top: 1px solid currentColor;
+    border-top: 2px solid currentColor;
 }
 
 .bracket--competitor-text {
@@ -211,7 +211,15 @@ header > h2 {
 .bracket--competitor-icon {
     padding: 0.5em;
 
-    border: 1px solid currentColor;
+    border-right: 2px solid currentColor;
+}
+
+.bracket--competitor[data-is-competitor-a] > .bracket--competitor-icon {
+    border-top: 2px solid currentColor;
+}
+
+.bracket--competitor[data-is-competitor-b] > .bracket--competitor-icon {
+    border-bottom: 2px solid currentColor;
 }
 
 .bracket--competitor[data-is-loser] > .bracket--competitor-icon {
@@ -246,5 +254,5 @@ header > h2 {
 .bracket--spacer[data-is-pair-spacer] {
     min-height: 5rem;
 
-    border-right: 1px solid currentColor;
+    border-right: 2px solid currentColor;
 }
