@@ -32,7 +32,7 @@ export function Check(props: IIconProps = {}) {
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
-            stroke-width='2'
+            stroke-width='3'
             stroke-linecap='square'
             stroke-linejoin='bevel'
         >
@@ -53,7 +53,7 @@ export function Medal(props: IIconProps = {}) {
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
-            stroke-width='2'
+            stroke-width='3'
             stroke-linecap='square'
             stroke-linejoin='bevel'
         >
@@ -78,7 +78,7 @@ export function X(props: IIconProps = {}) {
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
-            stroke-width='2'
+            stroke-width='3'
             stroke-linecap='square'
             stroke-linejoin='bevel'
         >
