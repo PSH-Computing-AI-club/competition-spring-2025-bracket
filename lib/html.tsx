@@ -113,6 +113,7 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
         <div
             class='bracket--competitor'
             data-is-bottom-competitor={isBottomCompetitor ? 'true' : undefined}
+            data-is-loser={isWinner ? undefined : 'true'}
             data-is-winner={isWinner ? 'true' : undefined}
         >
             <span class='bracket--competitor-text'>
