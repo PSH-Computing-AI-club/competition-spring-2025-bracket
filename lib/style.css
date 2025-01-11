@@ -63,7 +63,11 @@ body {
 }
 
 header {
+    display: flex;
+    flex-direction: column;
+
     grid-area: header;
+    justify-content: center;
 
     padding: 6rem 12rem;
 
