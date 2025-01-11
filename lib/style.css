@@ -110,7 +110,7 @@ header {
     grid-area: header;
     justify-content: center;
 
-    padding: 6rem 12rem;
+    padding: 6rem;
 
     background-color: var(--header-background);
     color: var(--header-color);
