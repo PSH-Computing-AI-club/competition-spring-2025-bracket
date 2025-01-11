@@ -124,7 +124,8 @@ function Bracket(props: IBracketProps) {
 
 export function BracketView(props: IBracketViewProps) {
     const { runResults } = props;
-    const { competitors, rounds, firstPlace } = runResults;
+    const { competitors, rounds, firstPlace, thirdPlace, thirdPlacePair } =
+        runResults;
 
     const nameLookup = Object.fromEntries(
         competitors.map((competitor) => {
@@ -135,6 +136,7 @@ export function BracketView(props: IBracketViewProps) {
     );
 
     const firstPlaceName = nameLookup[firstPlace];
+    const thirdPlaceName = nameLookup[thirdPlace];
 
     return (
         <Document title='Bracket'>
@@ -145,6 +147,8 @@ export function BracketView(props: IBracketViewProps) {
             </header>
 
             <main>
+                <h2>Main Bracket</h2>
+
                 <Bracket>
                     {rounds.map((round) => {
                         const { pairs } = round;
@@ -192,6 +196,48 @@ export function BracketView(props: IBracketViewProps) {
                         />
                     </BracketRound>
                 </Bracket>
+
+                <h2>3rd Place Bracket</h2>
+
+                <Bracket>
+                    <BracketRound>
+                        {[thirdPlacePair].map((pair, index) => {
+                            const { competitorA, competitorB, winner } = pair;
+
+                            const nameA = nameLookup[competitorA];
+                            const nameB = nameLookup[competitorB];
+
+                            return (
+                                <>
+                                    {index !== 0
+                                        ? <BracketSpacer />
+                                        : undefined}
+
+                                    <BracketCompetitor
+                                        competitor={nameA}
+                                        isWinner={winner ===
+                                            competitorA}
+                                    />
+
+                                    <BracketSpacer isPairSpacer />
+
+                                    <BracketCompetitor
+                                        competitor={nameB}
+                                        isWinner={winner ===
+                                            competitorB}
+                                        isBottomCompetitor
+                                    />
+                                </>
+                            );
+                        })}
+                    </BracketRound>
+
+                    <BracketRound>
+                        <BracketCompetitor
+                            competitor={thirdPlaceName}
+                            isWinner
+                        />
+                    </BracketRound>
                 </Bracket>
             </main>
         </Document>
