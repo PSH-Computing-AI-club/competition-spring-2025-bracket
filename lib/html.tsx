@@ -122,8 +122,9 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
 
     let statusIcon = ICONS.X;
 
-    if (isFirstPlace || isSecondPlace || isThirdPlace) statusIcon = ICONS.Medal;
-    else if (isWinner) statusIcon = ICONS.Check;
+    if (isFirstPlace || isSecondPlace || isThirdPlace) {
+        statusIcon = ICONS.Trophy;
+    } else if (isWinner) statusIcon = ICONS.Check;
 
     return (
         <div
