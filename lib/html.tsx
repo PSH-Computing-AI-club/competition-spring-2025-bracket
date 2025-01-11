@@ -94,9 +94,7 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
                 {competitor}
             </span>
 
-            <span class='bracket--competitor-icon'>
-                {statusIcon()}
-            </span>
+            {statusIcon({ className: 'bracket--competitor-icon' })}
         </div>
     );
 }
