@@ -13,9 +13,13 @@ export interface IRunResults {
         readonly name: string;
     }[];
 
+    readonly datetime: number;
+
     readonly firstPlace: string;
 
     readonly matchesBestOf: number;
+
+    readonly runNumber: number;
 
     readonly secondPlace: string;
 
@@ -147,6 +151,8 @@ function transformRounds(rounds: IBracketRound[]): IRunResults['rounds'] {
 
 export function transformBracketResults(
     bracket: IBracket,
+    datetime: number,
+    runNumber: number,
     bracketResults: IBracketResults,
 ): IRunResults {
     const { competitors, matchesBestOf, seed, suddenDeathMax } = bracket;
@@ -154,6 +160,9 @@ export function transformBracketResults(
         bracketResults;
 
     return {
+        datetime,
+        runNumber,
+
         matchesBestOf,
 
         // **HACK:** The type of `seed` is `bigint`. JSON only natively supports storing

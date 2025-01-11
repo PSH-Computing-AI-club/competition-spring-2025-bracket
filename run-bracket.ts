@@ -6,9 +6,12 @@ import {
     DIRECTORY_RUN_OUTPUT,
     FILE_RUN_LOG,
     generateRunSeed,
+    RUN_NUMBER,
 } from './lib/run.ts';
 
 import COMPETITOR_MANIFEST from './competitors.json' with { type: 'json' };
+
+const NOW = Date.now();
 
 await Deno.mkdir(DIRECTORY_RUN_OUTPUT, { recursive: true });
 
@@ -23,7 +26,12 @@ const bracket = makeBracket({
 });
 
 const bracketResults = await bracket.computeBracket();
-const runResults = transformBracketResults(bracket, bracketResults);
+const runResults = transformBracketResults(
+    bracket,
+    NOW,
+    RUN_NUMBER,
+    bracketResults,
+);
 
 const serializedResults = JSON.stringify(runResults);
 
