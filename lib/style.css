@@ -65,7 +65,7 @@ body {
 header {
     grid-area: header;
 
-    padding: 3rem 6rem;
+    padding: 6rem 12rem;
 
     background-color: var(--header-background);
     color: var(--header-color);
