@@ -124,7 +124,7 @@ function Bracket(props: IBracketProps) {
 
 export function BracketView(props: IBracketViewProps) {
     const { runResults } = props;
-    const { competitors, rounds } = runResults;
+    const { competitors, rounds, firstPlace } = runResults;
 
     const nameLookup = Object.fromEntries(
         competitors.map((competitor) => {
@@ -134,6 +134,7 @@ export function BracketView(props: IBracketViewProps) {
         }),
     );
 
+    const firstPlaceName = nameLookup[firstPlace];
 
     return (
         <Document title='Bracket'>
@@ -183,6 +184,14 @@ export function BracketView(props: IBracketViewProps) {
                             </BracketRound>
                         );
                     })}
+
+                    <BracketRound>
+                        <BracketCompetitor
+                            competitor={firstPlaceName}
+                            isWinner
+                        />
+                    </BracketRound>
+                </Bracket>
                 </Bracket>
             </main>
         </Document>
