@@ -256,9 +256,11 @@ header > h2 {
 .bracket--spacer {
     flex-grow: 1;
 
-    min-height: 5rem;
+    min-height: 2.5rem;
 }
 
 .bracket--spacer[data-is-pair-spacer] {
+    min-height: 5rem;
+
     border-right: 1px solid currentColor;
 }
