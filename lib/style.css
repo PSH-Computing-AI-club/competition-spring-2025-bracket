@@ -32,13 +32,13 @@
 
     --bracket--competitor--first-place-background: color-mix(
         in hsl,
-        gold,
-        var(--main-background) 80%
+        #febe10,
+        var(--main-background) 75%
     );
     --bracket--competitor--first-place-color: color-mix(
         in hsl,
-        gold,
-        white 15%
+        #febe10,
+        white 10%
     );
 
     --bracket--competitor--second-place-background: color-mix(
