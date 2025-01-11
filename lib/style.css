@@ -68,6 +68,8 @@ header {
     background-color: var(--header-background);
     color: var(--header-color);
 
+    padding: 3rem 6rem;
+
     text-align: center;
 }
 
