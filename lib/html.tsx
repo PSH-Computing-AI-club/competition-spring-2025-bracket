@@ -124,7 +124,16 @@ function Bracket(props: IBracketProps) {
 
 export function BracketView(props: IBracketViewProps) {
     const { runResults } = props;
-    const { rounds } = runResults;
+    const { competitors, rounds } = runResults;
+
+    const nameLookup = Object.fromEntries(
+        competitors.map((competitor) => {
+            const { identifier, name } = competitor;
+
+            return [identifier, name];
+        }),
+    );
+
 
     return (
         <Document title='Bracket'>
@@ -145,6 +154,9 @@ export function BracketView(props: IBracketViewProps) {
                                     const { competitorA, competitorB, winner } =
                                         pair;
 
+                                    const nameA = nameLookup[competitorA];
+                                    const nameB = nameLookup[competitorB];
+
                                     return (
                                         <>
                                             {index !== 0
@@ -152,7 +164,7 @@ export function BracketView(props: IBracketViewProps) {
                                                 : undefined}
 
                                             <BracketCompetitor
-                                                competitor={competitorA}
+                                                competitor={nameA}
                                                 isWinner={winner ===
                                                     competitorA}
                                             />
@@ -160,7 +172,7 @@ export function BracketView(props: IBracketViewProps) {
                                             <BracketSpacer isPairSpacer />
 
                                             <BracketCompetitor
-                                                competitor={competitorB}
+                                                competitor={nameB}
                                                 isWinner={winner ===
                                                     competitorB}
                                                 isBottomCompetitor
