@@ -30,15 +30,21 @@
         white 20%
     );
 
+    --first-place-color: color-mix(
+        in hsl,
+        darkgoldenrod,
+        gold 45%
+    );
+
     --bracket--competitor--first-place-background: color-mix(
         in hsl,
-        #febe10,
+        var(--first-place-color),
         var(--main-background) 75%
     );
     --bracket--competitor--first-place-color: color-mix(
         in hsl,
-        #febe10,
-        white 20%
+        var(--first-place-color),
+        white 30%
     );
 
     --bracket--competitor--second-place-background: color-mix(
