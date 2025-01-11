@@ -151,7 +151,7 @@ header > h2 {
     align-items: center;
     justify-content: space-between;
 
-    padding: var(--bracket--competitor-padding); /**/
+    padding: var(--bracket--competitor-padding);
 
     background-color: var(--bracket--competitor-background);
     color: var(--bracket--competitor-color);
