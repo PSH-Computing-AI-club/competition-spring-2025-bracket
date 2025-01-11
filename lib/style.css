@@ -99,6 +99,8 @@ h1, h2, h3, h4, h5, h6 {
 
 header > h3 {
     margin-bottom: 0;
+
+    font-size: 1.75rem;
 }
 
 header > h1 {
