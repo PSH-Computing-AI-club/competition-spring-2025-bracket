@@ -38,7 +38,7 @@
     --bracket--competitor--first-place-color: color-mix(
         in hsl,
         #febe10,
-        white 10%
+        white 20%
     );
 
     --bracket--competitor--second-place-background: color-mix(
