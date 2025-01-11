@@ -81,8 +81,15 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6 {
+    margin: 0.75em 0;
+}
+
+:is(h1, h2, h3, h4, h5, h6):first-child {
     margin-top: 0;
-    margin-bottom: 0.75em;
+}
+
+:is(h1, h2, h3, h4, h5, h6):last-child {
+    margin-bottom: 0;
 }
 
 .bracket {
