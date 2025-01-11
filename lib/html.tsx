@@ -64,7 +64,14 @@ function Document(props: IDocumentProps) {
             </head>
 
             <body>
-                {children}
+                <header>
+                    <h2>Spring '25</h2>
+                    <h1>Blossoming Battlegrounds</h1>
+                </header>
+
+                <main>
+                    {children}
+                </main>
             </body>
         </html>
     );
@@ -140,106 +147,96 @@ export function BracketView(props: IBracketViewProps) {
 
     return (
         <Document title='Bracket'>
-            <header>
-                <h2>Spring '25</h2>
+            <h3>Main Bracket</h3>
 
-                <h1>Blossoming Battlegrounds</h1>
-            </header>
+            <Bracket>
+                {rounds.map((round) => {
+                    const { pairs } = round;
 
-            <main>
-                <h3>Main Bracket</h3>
+                    return (
+                        <BracketRound>
+                            {pairs.map((pair, index) => {
+                                const { competitorA, competitorB, winner } =
+                                    pair;
 
-                <Bracket>
-                    {rounds.map((round) => {
-                        const { pairs } = round;
+                                const nameA = nameLookup[competitorA];
+                                const nameB = nameLookup[competitorB];
+
+                                return (
+                                    <>
+                                        {index !== 0
+                                            ? <BracketSpacer />
+                                            : undefined}
+
+                                        <BracketCompetitor
+                                            competitor={nameA}
+                                            isWinner={winner ===
+                                                competitorA}
+                                        />
+
+                                        <BracketSpacer isPairSpacer />
+
+                                        <BracketCompetitor
+                                            competitor={nameB}
+                                            isWinner={winner ===
+                                                competitorB}
+                                            isBottomCompetitor
+                                        />
+                                    </>
+                                );
+                            })}
+                        </BracketRound>
+                    );
+                })}
+
+                <BracketRound>
+                    <BracketCompetitor
+                        competitor={firstPlaceName}
+                        isWinner
+                    />
+                </BracketRound>
+            </Bracket>
+
+            <h3>3rd Place Bracket</h3>
+
+            <Bracket>
+                <BracketRound>
+                    {[thirdPlacePair].map((pair, index) => {
+                        const { competitorA, competitorB, winner } = pair;
+
+                        const nameA = nameLookup[competitorA];
+                        const nameB = nameLookup[competitorB];
 
                         return (
-                            <BracketRound>
-                                {pairs.map((pair, index) => {
-                                    const { competitorA, competitorB, winner } =
-                                        pair;
+                            <>
+                                {index !== 0 ? <BracketSpacer /> : undefined}
 
-                                    const nameA = nameLookup[competitorA];
-                                    const nameB = nameLookup[competitorB];
+                                <BracketCompetitor
+                                    competitor={nameA}
+                                    isWinner={winner ===
+                                        competitorA}
+                                />
 
-                                    return (
-                                        <>
-                                            {index !== 0
-                                                ? <BracketSpacer />
-                                                : undefined}
+                                <BracketSpacer isPairSpacer />
 
-                                            <BracketCompetitor
-                                                competitor={nameA}
-                                                isWinner={winner ===
-                                                    competitorA}
-                                            />
-
-                                            <BracketSpacer isPairSpacer />
-
-                                            <BracketCompetitor
-                                                competitor={nameB}
-                                                isWinner={winner ===
-                                                    competitorB}
-                                                isBottomCompetitor
-                                            />
-                                        </>
-                                    );
-                                })}
-                            </BracketRound>
+                                <BracketCompetitor
+                                    competitor={nameB}
+                                    isWinner={winner ===
+                                        competitorB}
+                                    isBottomCompetitor
+                                />
+                            </>
                         );
                     })}
+                </BracketRound>
 
-                    <BracketRound>
-                        <BracketCompetitor
-                            competitor={firstPlaceName}
-                            isWinner
-                        />
-                    </BracketRound>
-                </Bracket>
-
-                <h3>3rd Place Bracket</h3>
-
-                <Bracket>
-                    <BracketRound>
-                        {[thirdPlacePair].map((pair, index) => {
-                            const { competitorA, competitorB, winner } = pair;
-
-                            const nameA = nameLookup[competitorA];
-                            const nameB = nameLookup[competitorB];
-
-                            return (
-                                <>
-                                    {index !== 0
-                                        ? <BracketSpacer />
-                                        : undefined}
-
-                                    <BracketCompetitor
-                                        competitor={nameA}
-                                        isWinner={winner ===
-                                            competitorA}
-                                    />
-
-                                    <BracketSpacer isPairSpacer />
-
-                                    <BracketCompetitor
-                                        competitor={nameB}
-                                        isWinner={winner ===
-                                            competitorB}
-                                        isBottomCompetitor
-                                    />
-                                </>
-                            );
-                        })}
-                    </BracketRound>
-
-                    <BracketRound>
-                        <BracketCompetitor
-                            competitor={thirdPlaceName}
-                            isWinner
-                        />
-                    </BracketRound>
-                </Bracket>
-            </main>
+                <BracketRound>
+                    <BracketCompetitor
+                        competitor={thirdPlaceName}
+                        isWinner
+                    />
+                </BracketRound>
+            </Bracket>
         </Document>
     );
 }
