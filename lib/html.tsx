@@ -120,7 +120,10 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
         isWinner,
     } = props;
 
-    const statusIcon = isWinner ? ICONS.Check : ICONS.X;
+    let statusIcon = ICONS.X;
+
+    if (isFirstPlace || isSecondPlace || isThirdPlace) statusIcon = ICONS.Medal;
+    else if (isWinner) ICONS.Check;
 
     return (
         <div
