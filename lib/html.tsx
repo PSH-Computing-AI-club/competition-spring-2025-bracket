@@ -8,6 +8,10 @@ const TEXT_STYLE = await Deno.readTextFile('./lib/style.css');
 interface IDocumentProps {
     readonly children: ComponentChildren;
 
+    readonly datetime: number;
+
+    readonly runNumber: number;
+
     readonly title: string;
 }
 
@@ -44,7 +48,28 @@ function Style() {
 }
 
 function Document(props: IDocumentProps) {
-    const { children, title } = props;
+    const { children, datetime, runNumber, title } = props;
+
+    const instant = Temporal.Instant.fromEpochMilliseconds(datetime);
+    const plainDate = instant
+        .toZonedDateTimeISO('America/New_York')
+        .toPlainDate();
+
+    // **HACK:** Deno's i18n backend does not respect that we are excluding the
+    // year in our formatting options. So, we need to manually remove it.
+    //
+    // We are expecting to get a value like "Jan 11, 2025". And then split it
+    // by the commma to then finally get the first element of that split.
+    //
+    // THIS MAY BREAK across i18n backends! i.e. different JavaScript runtimes or
+    // future Deno / V8 versions.
+
+    const [formattedDate] = plainDate
+        .toLocaleString('en-US', {
+            month: 'short',
+            day: '2-digit',
+        })
+        .split(',');
 
     return (
         <html lang='en'>
@@ -68,7 +93,7 @@ function Document(props: IDocumentProps) {
                 <header>
                     <h3>Spring '25</h3>
                     <h1>Blossoming Battlegrounds</h1>
-                    <h2>{title}</h2>
+                    <h2>{title} — RUN {runNumber}, {formattedDate}</h2>
                 </header>
 
                 <main>
@@ -134,8 +159,15 @@ function Bracket(props: IBracketProps) {
 
 export function BracketView(props: IBracketViewProps) {
     const { runResults } = props;
-    const { competitors, rounds, firstPlace, thirdPlace, thirdPlacePair } =
-        runResults;
+    const {
+        competitors,
+        datetime,
+        rounds,
+        runNumber,
+        firstPlace,
+        thirdPlace,
+        thirdPlacePair,
+    } = runResults;
 
     const nameLookup = Object.fromEntries(
         competitors.map((competitor) => {
@@ -149,7 +181,11 @@ export function BracketView(props: IBracketViewProps) {
     const thirdPlaceName = nameLookup[thirdPlace];
 
     return (
-        <Document title='Bracket'>
+        <Document
+            title='Bracket'
+            datetime={datetime}
+            runNumber={runNumber}
+        >
             <h4>Main Bracket</h4>
 
             <Bracket>
