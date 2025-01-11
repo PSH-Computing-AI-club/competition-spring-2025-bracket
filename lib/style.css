@@ -127,7 +127,7 @@ main {
     background-color: var(--main-background);
     color: var(--main-color);
 
-    overflow: auto;
+    overflow-y: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -162,12 +162,9 @@ header > h2 {
 }
 
 .bracket {
-    list-style: none;
-
     display: flex;
-    flex-grow: 1;
 
-    padding: 0;
+    overflow: auto;
 }
 
 .bracket:not(:last-child) {
