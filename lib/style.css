@@ -13,7 +13,12 @@
     --bracket--competitor--winner-background: color-mix(
         in hsl,
         springgreen,
-        white 45%
+        white 80%
+    );
+    --bracket--competitor--winner-color: color-mix(
+        in hsl,
+        springgreen,
+        white 15%
     );
 
     --bracket--line-size: 1px;
@@ -99,6 +104,13 @@ h1, h2, h3, h4, h5, h6 {
     flex-grow: 0.5;
 }
 
+.bracket--competitor {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
 .bracket--competitor:not([data-is-bottom-competitor]) {
     border-bottom: var(--bracket--line-size) solid currentColor;
 }
@@ -107,19 +119,14 @@ h1, h2, h3, h4, h5, h6 {
     border-top: var(--bracket--line-size) solid currentColor;
 }
 
-.bracket--competitor:not([data-is-winner]) {
+.bracket--competitor:not([data-is-winner]) > .bracket--competitor-icon {
     background-color: var(--bracket--competitor--loser-background);
     color: var(--bracket--competitor--loser-color);
 }
 
-.bracket--competitor[data-is-winner] {
+.bracket--competitor[data-is-winner] > .bracket--competitor-icon {
     background-color: var(--bracket--competitor--winner-background);
     color: var(--bracket--competitor--winner-color);
-}
-
-.bracket--competitor-text {
-    display: flex;
-    justify-content: space-between;
 }
 
 .bracket--spacer {
