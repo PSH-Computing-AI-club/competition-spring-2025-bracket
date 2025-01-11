@@ -137,6 +137,10 @@ h1, h2, h3, h4, h5, h6 {
     border-top: 1px solid currentColor;
 }
 
+.bracket--competitor-text {
+    padding: 0 0.5em 0 0.5em;
+}
+
 .bracket--competitor-icon {
     padding: 0.5em;
 }
