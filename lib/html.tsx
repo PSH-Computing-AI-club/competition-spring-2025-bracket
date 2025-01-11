@@ -66,9 +66,9 @@ function Document(props: IDocumentProps) {
 
             <body>
                 <header>
-                    <h2>Spring '25</h2>
+                    <h3>Spring '25</h3>
                     <h1>Blossoming Battlegrounds</h1>
-                    <h3>{title}</h3>
+                    <h2>{title}</h2>
                 </header>
 
                 <main>
