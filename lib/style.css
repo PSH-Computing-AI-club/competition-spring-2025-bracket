@@ -1,4 +1,10 @@
 :root {
+    --body-background: white;
+    --body-color: black;
+
+    --header-background: black;
+    --header-color: white;
+
     --bracket--competitor-background: white;
     --bracket--competitor-color: black;
 
@@ -45,8 +51,8 @@ body {
 
     margin: 0;
 
-    background-color: white;
-    color: black;
+    background-color: var(--body-background);
+    color: var(--body-color);
     font-family:
         ui-rounded,
         'Hiragino Maru Gothic ProN',
@@ -65,8 +71,8 @@ body {
 header {
     grid-area: header;
 
-    background-color: black;
-    color: white;
+    background-color: var(--header-background);
+    color: var(--header-color);
 }
 
 main {
