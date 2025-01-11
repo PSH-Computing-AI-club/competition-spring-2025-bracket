@@ -20,6 +20,12 @@ interface IBracketCompetitorProps {
 
     readonly isCompetitorA?: boolean;
 
+    readonly isFirstPlace?: boolean;
+
+    readonly isSecondPlace?: boolean;
+
+    readonly isThirdPlace?: boolean;
+
     readonly isWinner?: boolean;
 }
 
@@ -105,7 +111,14 @@ function Document(props: IDocumentProps) {
 }
 
 function BracketCompetitor(props: IBracketCompetitorProps) {
-    const { competitor, isCompetitorA, isWinner } = props;
+    const {
+        competitor,
+        isCompetitorA,
+        isFirstPlace,
+        isSecondPlace,
+        isThirdPlace,
+        isWinner,
+    } = props;
 
     const statusIcon = isWinner ? ICONS.Check : ICONS.X;
 
@@ -115,6 +128,9 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
             data-is-competitor-a={isCompetitorA ? 'true' : undefined}
             data-is-competitor-b={isCompetitorA ? undefined : 'true'}
             data-is-loser={isWinner ? undefined : 'true'}
+            data-is-first-place={isFirstPlace ? 'true' : undefined}
+            data-is-second-place={isSecondPlace ? 'true' : undefined}
+            data-is-third-place={isThirdPlace ? 'true' : undefined}
             data-is-winner={isWinner ? 'true' : undefined}
         >
             <span class='bracket--competitor-text'>
@@ -167,6 +183,7 @@ export function BracketView(props: IBracketViewProps) {
         rounds,
         runNumber,
         firstPlace,
+        secondPlace,
         thirdPlace,
         thirdPlacePair,
     } = runResults;
@@ -191,26 +208,37 @@ export function BracketView(props: IBracketViewProps) {
             <h4>Main Bracket</h4>
 
             <Bracket>
-                {rounds.map((round) => {
+                {rounds.map((round, roundIndex) => {
                     const { pairs } = round;
 
                     return (
                         <BracketRound>
-                            {pairs.map((pair, index) => {
+                            {pairs.map((pair, pairIndex) => {
                                 const { competitorA, competitorB, winner } =
                                     pair;
 
                                 const nameA = nameLookup[competitorA];
                                 const nameB = nameLookup[competitorB];
 
+                                const isASecondPlace = (roundIndex ===
+                                        rounds.length - 1)
+                                    ? (secondPlace === competitorA)
+                                    : undefined;
+
+                                const isBSecondPlace = (roundIndex ===
+                                        rounds.length - 1)
+                                    ? (secondPlace === competitorB)
+                                    : undefined;
+
                                 return (
                                     <>
-                                        {index !== 0
+                                        {pairIndex !== 0
                                             ? <BracketSpacer />
                                             : undefined}
 
                                         <BracketCompetitor
                                             competitor={nameA}
+                                            isSecondPlace={isASecondPlace}
                                             isWinner={winner ===
                                                 competitorA}
                                             isCompetitorA
@@ -220,6 +248,7 @@ export function BracketView(props: IBracketViewProps) {
 
                                         <BracketCompetitor
                                             competitor={nameB}
+                                            isSecondPlace={isBSecondPlace}
                                             isWinner={winner ===
                                                 competitorB}
                                         />
@@ -234,6 +263,7 @@ export function BracketView(props: IBracketViewProps) {
                     <BracketCompetitor
                         competitor={firstPlaceName}
                         isCompetitorA
+                        isFirstPlace
                         isWinner
                     />
                 </BracketRound>
@@ -243,7 +273,7 @@ export function BracketView(props: IBracketViewProps) {
 
             <Bracket>
                 <BracketRound>
-                    {[thirdPlacePair].map((pair, index) => {
+                    {[thirdPlacePair].map((pair, pairIndex) => {
                         const { competitorA, competitorB, winner } = pair;
 
                         const nameA = nameLookup[competitorA];
@@ -251,7 +281,9 @@ export function BracketView(props: IBracketViewProps) {
 
                         return (
                             <>
-                                {index !== 0 ? <BracketSpacer /> : undefined}
+                                {pairIndex !== 0
+                                    ? <BracketSpacer />
+                                    : undefined}
 
                                 <BracketCompetitor
                                     competitor={nameA}
@@ -276,6 +308,7 @@ export function BracketView(props: IBracketViewProps) {
                     <BracketCompetitor
                         competitor={thirdPlaceName}
                         isCompetitorA
+                        isThirdPlace
                         isWinner
                     />
                 </BracketRound>
