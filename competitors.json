@@ -37,5 +37,45 @@
     {
         "name": "Test Player #8",
         "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "Test Player #9",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "Test Player #10",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "Test Player #11",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "Test Player #12",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "Test Player #13",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "Test Player #14",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "Test Player #15",
+        "repository": "https://github.com/.../..."
+    },
+
+    {
+        "name": "Test Player #16",
+        "repository": "https://github.com/.../..."
     }
 ]
