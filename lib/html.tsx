@@ -1,9 +1,13 @@
 import type { ComponentChildren } from 'preact';
 
+import type { IRunResults } from './results.ts';
+
 const TEXT_STYLE = await Deno.readTextFile('./lib/style.css');
 
 interface IDocumentProps {
     readonly children: ComponentChildren;
+
+    readonly title: string;
 }
 
 interface IBracketCompetitorProps {
@@ -26,6 +30,10 @@ interface IBracketProps {
     readonly children: ComponentChildren;
 }
 
+export interface IBracketViewProps {
+    readonly runResults: IRunResults;
+}
+
 function Style() {
     return (
         <style
@@ -35,7 +43,7 @@ function Style() {
 }
 
 function Document(props: IDocumentProps) {
-    const { children } = props;
+    const { children, title } = props;
 
     return (
         <html lang='en'>
@@ -47,8 +55,9 @@ function Document(props: IDocumentProps) {
                 />
 
                 <title>
-                    Bracket :: Spring '25 Blossoming Battlegrounds — PSH
-                    Computing & AI Club
+                    {title}{' '}
+                    :: Spring '25 Blossoming Battlegrounds — PSH Computing & AI
+                    Club
                 </title>
 
                 <Style />
@@ -113,27 +122,12 @@ function Bracket(props: IBracketProps) {
     );
 }
 
-export function BracketView() {
-    const ROUND1 = [
-        { pA: 'Team 1', pB: 'Team 2', winner: 'Team 1' },
-        { pA: 'Team 3', pB: 'Team 4', winner: 'Team 4' },
-        { pA: 'Team 5', pB: 'Team 6', winner: 'Team 6' },
-        { pA: 'Team 7', pB: 'Team 8', winner: 'Team 7' },
-    ];
-
-    const ROUND2 = [
-        { pA: 'Team 1', pB: 'Team 4', winner: 'Team 1' },
-        { pA: 'Team 6', pB: 'Team 7', winner: 'Team 6' },
-    ];
-
-    const ROUND3 = [
-        { pA: 'Team 1', pB: 'Team 6', winner: 'Team 1' },
-    ];
-
-    const ROUNDS = [ROUND1, ROUND2, ROUND3];
+export function BracketView(props: IBracketViewProps) {
+    const { runResults } = props;
+    const { rounds } = runResults;
 
     return (
-        <Document>
+        <Document title='Bracket'>
             <header>
                 <h1>
                     Spring '25 Blossoming Battlegrounds
@@ -142,11 +136,14 @@ export function BracketView() {
 
             <main>
                 <Bracket>
-                    {ROUNDS.map((pairs) => {
+                    {rounds.map((round) => {
+                        const { pairs } = round;
+
                         return (
                             <BracketRound>
                                 {pairs.map((pair, index) => {
-                                    const { pA, pB, winner } = pair;
+                                    const { competitorA, competitorB, winner } =
+                                        pair;
 
                                     return (
                                         <>
@@ -155,15 +152,17 @@ export function BracketView() {
                                                 : undefined}
 
                                             <BracketCompetitor
-                                                competitor={pA}
-                                                isWinner={winner === pA}
+                                                competitor={competitorA}
+                                                isWinner={winner ===
+                                                    competitorA}
                                             />
 
                                             <BracketSpacer isPairSpacer />
 
                                             <BracketCompetitor
-                                                competitor={pB}
-                                                isWinner={winner === pB}
+                                                competitor={competitorB}
+                                                isWinner={winner ===
+                                                    competitorB}
                                                 isBottomCompetitor
                                             />
                                         </>

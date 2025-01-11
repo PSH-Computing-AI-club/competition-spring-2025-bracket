@@ -9,7 +9,7 @@ const HEADER_DOCTYPE = '<!DOCTYPE html>\n';
 const jsonPayload = await Deno.readTextFile(FILE_RUN_LOG);
 const runResults = JSON.parse(jsonPayload) as IRunResults;
 
-const view = BracketView();
+const view = BracketView({ runResults });
 const rendered = render(view, {}, { pretty: true });
 
 console.log(HEADER_DOCTYPE + rendered);
