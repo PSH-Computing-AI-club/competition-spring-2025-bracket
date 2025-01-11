@@ -22,12 +22,12 @@
     --bracket--competitor--winner-background: color-mix(
         in hsl,
         springgreen,
-        var(--main-background) 80%
+        var(--main-background) 82.5%
     );
     --bracket--competitor--winner-color: color-mix(
         in hsl,
         springgreen,
-        white 40%
+        white 45%
     );
 
     --bracket--competitor--first-place-background: color-mix(
