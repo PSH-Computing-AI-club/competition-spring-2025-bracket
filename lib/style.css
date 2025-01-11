@@ -65,10 +65,11 @@ body {
 header {
     grid-area: header;
 
+    padding: 3rem 6rem;
+
     background-color: var(--header-background);
     color: var(--header-color);
-
-    padding: 3rem 6rem;
+    line-height: 1;
 
     text-align: center;
 }
