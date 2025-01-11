@@ -18,7 +18,7 @@ interface IDocumentProps {
 interface IBracketCompetitorProps {
     readonly competitor: string;
 
-    readonly isBottomCompetitor?: boolean;
+    readonly isCompetitorA?: boolean;
 
     readonly isWinner?: boolean;
 }
@@ -105,14 +105,15 @@ function Document(props: IDocumentProps) {
 }
 
 function BracketCompetitor(props: IBracketCompetitorProps) {
-    const { competitor, isBottomCompetitor, isWinner } = props;
+    const { competitor, isCompetitorA, isWinner } = props;
 
     const statusIcon = isWinner ? ICONS.Check : ICONS.X;
 
     return (
         <div
             class='bracket--competitor'
-            data-is-bottom-competitor={isBottomCompetitor ? 'true' : undefined}
+            data-is-competitor-a={isCompetitorA ? 'true' : undefined}
+            data-is-competitor-b={isCompetitorA ? undefined : 'true'}
             data-is-loser={isWinner ? undefined : 'true'}
             data-is-winner={isWinner ? 'true' : undefined}
         >
@@ -212,6 +213,7 @@ export function BracketView(props: IBracketViewProps) {
                                             competitor={nameA}
                                             isWinner={winner ===
                                                 competitorA}
+                                            isCompetitorA
                                         />
 
                                         <BracketSpacer isPairSpacer />
@@ -220,7 +222,6 @@ export function BracketView(props: IBracketViewProps) {
                                             competitor={nameB}
                                             isWinner={winner ===
                                                 competitorB}
-                                            isBottomCompetitor
                                         />
                                     </>
                                 );
@@ -232,6 +233,7 @@ export function BracketView(props: IBracketViewProps) {
                 <BracketRound>
                     <BracketCompetitor
                         competitor={firstPlaceName}
+                        isCompetitorA
                         isWinner
                     />
                 </BracketRound>
@@ -255,6 +257,7 @@ export function BracketView(props: IBracketViewProps) {
                                     competitor={nameA}
                                     isWinner={winner ===
                                         competitorA}
+                                    isCompetitorA
                                 />
 
                                 <BracketSpacer isPairSpacer />
@@ -263,7 +266,6 @@ export function BracketView(props: IBracketViewProps) {
                                     competitor={nameB}
                                     isWinner={winner ===
                                         competitorB}
-                                    isBottomCompetitor
                                 />
                             </>
                         );
@@ -273,6 +275,7 @@ export function BracketView(props: IBracketViewProps) {
                 <BracketRound>
                     <BracketCompetitor
                         competitor={thirdPlaceName}
+                        isCompetitorA
                         isWinner
                     />
                 </BracketRound>

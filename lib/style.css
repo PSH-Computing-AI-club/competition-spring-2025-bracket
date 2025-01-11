@@ -157,11 +157,11 @@ header > h2 {
     color: var(--bracket--competitor-color);
 }
 
-.bracket--competitor:not([data-is-bottom-competitor]) {
+.bracket--competitor[data-is-competitor-a] {
     border-bottom: 1px solid currentColor;
 }
 
-.bracket--competitor[data-is-bottom-competitor] {
+.bracket--competitor[data-is-competitor-b] {
     border-top: 1px solid currentColor;
 }
 
