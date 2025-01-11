@@ -13,7 +13,7 @@
         tomato,
         white 65%
     );
-    --bracket--competitor--loser-olor: color-mix(
+    --bracket--competitor--loser-color: color-mix(
         in hsl,
         tomato,
         white 15%
