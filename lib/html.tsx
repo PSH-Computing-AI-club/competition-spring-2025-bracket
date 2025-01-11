@@ -141,13 +141,13 @@ export function BracketView(props: IBracketViewProps) {
     return (
         <Document title='Bracket'>
             <header>
-                <h1>
-                    Spring '25 Blossoming Battlegrounds
-                </h1>
+                <h2>Spring '25</h2>
+
+                <h1>Blossoming Battlegrounds</h1>
             </header>
 
             <main>
-                <h2>Main Bracket</h2>
+                <h3>Main Bracket</h3>
 
                 <Bracket>
                     {rounds.map((round) => {
@@ -197,7 +197,7 @@ export function BracketView(props: IBracketViewProps) {
                     </BracketRound>
                 </Bracket>
 
-                <h2>3rd Place Bracket</h2>
+                <h3>3rd Place Bracket</h3>
 
                 <Bracket>
                     <BracketRound>
