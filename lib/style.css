@@ -67,6 +67,8 @@ header {
 
     background-color: var(--header-background);
     color: var(--header-color);
+
+    text-align: center;
 }
 
 main {
@@ -90,6 +92,18 @@ h1, h2, h3, h4, h5, h6 {
 
 :is(h1, h2, h3, h4, h5, h6):last-child {
     margin-bottom: 0;
+}
+
+header > h3 {
+    margin-bottom: 0;
+}
+
+header > h1 {
+    margin-top: 0;
+}
+
+header > h2 {
+    margin-top: 0;
 }
 
 .bracket {
@@ -139,6 +153,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .bracket--competitor-text {
     padding: 0 0.5em 0 0.5em;
+}
+
+.bracket--competitor:not([data-is-winner]) > .bracket--competitor-text {
+    color: var(--bracket--competitor--loser-color);
+    opacity: 0.85;
 }
 
 .bracket--competitor-icon {
