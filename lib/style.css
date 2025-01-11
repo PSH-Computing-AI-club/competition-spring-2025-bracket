@@ -29,10 +29,6 @@
         springgreen,
         white 15%
     );
-
-    --bracket--line-size: 1px;
-
-    --bracket--pair-spacing: 5rem;
 }
 
 html, body {
@@ -119,16 +115,18 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: space-between;
 
+    padding: var(--bracket--competitor-padding); /**/
+
     background-color: var(--bracket--competitor-background);
     color: var(--bracket--competitor-color);
 }
 
 .bracket--competitor:not([data-is-bottom-competitor]) {
-    border-bottom: var(--bracket--line-size) solid currentColor;
+    border-bottom: 1px solid currentColor;
 }
 
 .bracket--competitor[data-is-bottom-competitor] {
-    border-top: var(--bracket--line-size) solid currentColor;
+    border-top: 1px solid currentColor;
 }
 
 .bracket--competitor:not([data-is-winner]) > .bracket--competitor-icon {
@@ -146,7 +144,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bracket--spacer[data-is-pair-spacer] {
-    min-height: var(--bracket--pair-spacing);
+    min-height: 5rem;
 
-    border-right: var(--bracket--line-size) solid currentColor;
+    border-right: 1px solid currentColor;
 }
