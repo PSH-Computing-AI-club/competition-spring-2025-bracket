@@ -77,7 +77,7 @@ header {
 main {
     grid-area: main;
 
-    padding: 0.5rem 1rem;
+    padding: 1rem 2rem;
 
     background-color: var(--main-background);
     color: var(--main-color);
