@@ -90,11 +90,7 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin: 0.75em 0;
-}
-
-:is(h1, h2, h3, h4, h5, h6):first-child {
-    margin-top: 0;
+    margin: 0 0 0.75em 0;
 }
 
 :is(h1, h2, h3, h4, h5, h6):last-child {
@@ -108,15 +104,12 @@ header > h3 {
 }
 
 header > h1 {
-    margin-top: 0;
     margin-bottom: 0.25em;
 
     font-size: 3rem;
 }
 
 header > h2 {
-    margin-top: 0;
-
     font-size: 2rem;
 
     letter-spacing: 0.25em;
