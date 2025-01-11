@@ -1,4 +1,7 @@
 :root {
+    --bracket--competitor-background: white;
+    --bracket--competitor-color: black;
+
     --bracket--competitor--loser-background: color-mix(
         in hsl,
         tomato,
@@ -109,6 +112,9 @@ h1, h2, h3, h4, h5, h6 {
 
     align-items: center;
     justify-content: space-between;
+
+    background-color: var(--bracket--competitor-background);
+    color: var(--bracket--competitor-color);
 }
 
 .bracket--competitor:not([data-is-bottom-competitor]) {
