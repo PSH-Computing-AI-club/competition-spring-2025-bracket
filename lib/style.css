@@ -210,8 +210,9 @@ header > h2 {
 
 .bracket--competitor:not([data-is-second-place])[data-is-loser]
     > .bracket--competitor-text {
-    color: var(--bracket--competitor--loser-color);
-    opacity: 0.85;
+    color: color-mix(in hsl, currentColor, transparent 35%);
+
+    text-decoration: line-through var(--bracket--competitor--loser-color);
 }
 
 .bracket--competitor-icon {
