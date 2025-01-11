@@ -1,5 +1,6 @@
 import type { ComponentChildren } from 'preact';
 
+import * as ICONS from './icons.tsx';
 import type { IRunResults } from './results.ts';
 
 const TEXT_STYLE = await Deno.readTextFile('./lib/style.css');
@@ -81,7 +82,7 @@ function Document(props: IDocumentProps) {
 function BracketCompetitor(props: IBracketCompetitorProps) {
     const { competitor, isBottomCompetitor, isWinner } = props;
 
-    const statusIcon = isWinner ? '✔️' : '❌';
+    const statusIcon = isWinner ? ICONS.Check : ICONS.X;
 
     return (
         <div
@@ -91,7 +92,9 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
         >
             <span class='bracket--competitor-text'>
                 {competitor}
-                <span class='bracket--competitor-icon'>{statusIcon}</span>
+                <span class='bracket--competitor-icon'>
+                    {statusIcon()}
+                </span>
             </span>
         </div>
     );
