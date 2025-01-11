@@ -99,7 +99,10 @@ function Document(props: IDocumentProps) {
                 <header>
                     <h3>Spring '25</h3>
                     <h1>Blossoming Battlegrounds</h1>
-                    <h2>{title} — RUN {runNumber}, {formattedDate}</h2>
+                    <h2>
+                        {title} — <br />
+                        RUN {runNumber}, {formattedDate}
+                    </h2>
                 </header>
 
                 <main>
