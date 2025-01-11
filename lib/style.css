@@ -29,6 +29,39 @@
         springgreen,
         white 30%
     );
+
+    --bracket--competitor--first-place-background: color-mix(
+        in hsl,
+        gold,
+        whitesmoke 90%
+    );
+    --bracket--competitor--first-place-color: color-mix(
+        in hsl,
+        gold,
+        white 10%
+    );
+
+    --bracket--competitor--second-place-background: color-mix(
+        in hsl,
+        lightsteelblue,
+        white 60%
+    );
+    --bracket--competitor--second-place-color: color-mix(
+        in hsl,
+        lightsteelblue,
+        white 5%
+    );
+
+    --bracket--competitor--third-place-background: color-mix(
+        in hsl,
+        peru,
+        white 75%
+    );
+    --bracket--competitor--third-place-color: color-mix(
+        in hsl,
+        peru,
+        white 15%
+    );
 }
 
 html, body {
@@ -169,7 +202,8 @@ header > h2 {
     padding: 0 0.5em 0 0.5em;
 }
 
-.bracket--competitor[data-is-loser] > .bracket--competitor-text {
+.bracket--competitor:not([data-is-second-place])[data-is-loser]
+    > .bracket--competitor-text {
     color: var(--bracket--competitor--loser-color);
     opacity: 0.85;
 }
@@ -188,6 +222,21 @@ header > h2 {
 .bracket--competitor[data-is-winner] > .bracket--competitor-icon {
     background-color: var(--bracket--competitor--winner-background);
     color: var(--bracket--competitor--winner-color);
+}
+
+.bracket--competitor[data-is-first-place] > .bracket--competitor-icon {
+    background-color: var(--bracket--competitor--first-place-background);
+    color: var(--bracket--competitor--first-place-color);
+}
+
+.bracket--competitor[data-is-second-place] > .bracket--competitor-icon {
+    background-color: var(--bracket--competitor--second-place-background);
+    color: var(--bracket--competitor--second-place-color);
+}
+
+.bracket--competitor[data-is-third-place] > .bracket--competitor-icon {
+    background-color: var(--bracket--competitor--third-place-background);
+    color: var(--bracket--competitor--third-place-color);
 }
 
 .bracket--spacer {
