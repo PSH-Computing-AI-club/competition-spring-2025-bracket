@@ -11,7 +11,7 @@
     --bracket--competitor--loser-background: color-mix(
         in hsl,
         tomato,
-        white 70%
+        var(--main-background) 75%
     );
     --bracket--competitor--loser-color: color-mix(
         in hsl,
@@ -22,40 +22,40 @@
     --bracket--competitor--winner-background: color-mix(
         in hsl,
         springgreen,
-        white 80%
+        var(--main-background) 80%
     );
     --bracket--competitor--winner-color: color-mix(
         in hsl,
         springgreen,
-        white 30%
+        white 40%
     );
 
     --bracket--competitor--first-place-background: color-mix(
         in hsl,
         gold,
-        whitesmoke 90%
+        var(--main-background) 80%
     );
     --bracket--competitor--first-place-color: color-mix(
         in hsl,
         gold,
-        white 10%
+        white 15%
     );
 
     --bracket--competitor--second-place-background: color-mix(
         in hsl,
         lightsteelblue,
-        white 60%
+        var(--main-background) 60%
     );
     --bracket--competitor--second-place-color: color-mix(
         in hsl,
         lightsteelblue,
-        white 5%
+        white 0%
     );
 
     --bracket--competitor--third-place-background: color-mix(
         in hsl,
         peru,
-        white 75%
+        var(--main-background) 75%
     );
     --bracket--competitor--third-place-color: color-mix(
         in hsl,
