@@ -176,6 +176,8 @@ header > h2 {
 
 .bracket--competitor-icon {
     padding: 0.5em;
+
+    border: 1px solid currentColor;
 }
 
 .bracket--competitor[data-is-loser] > .bracket--competitor-icon {
