@@ -33,8 +33,8 @@ export function Check(props: IIconProps = {}) {
             fill='none'
             stroke='currentColor'
             stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
+            stroke-linecap='square'
+            stroke-linejoin='bevel'
         >
             <path d='M20 6 9 17l-5-5' />
         </svg>
@@ -54,8 +54,8 @@ export function Medal(props: IIconProps = {}) {
             fill='none'
             stroke='currentColor'
             stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
+            stroke-linecap='square'
+            stroke-linejoin='bevel'
         >
             <path d='M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15' />
             <path d='M11 12 5.12 2.2' />
@@ -79,8 +79,8 @@ export function X(props: IIconProps = {}) {
             fill='none'
             stroke='currentColor'
             stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
+            stroke-linecap='square'
+            stroke-linejoin='bevel'
         >
             <path d='M18 6 6 18' />
             <path d='m6 6 12 12' />
