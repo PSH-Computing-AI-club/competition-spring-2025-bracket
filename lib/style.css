@@ -254,17 +254,19 @@ header > h2 {
     border-right: 2px solid currentColor;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 480px) {
+    header br {
+        display: initial;
+    }
+}
+
+@media (max-width: 1024px) {
     html {
         font-size: 14px;
     }
 
     header {
         padding: 1rem;
-    }
-
-    header br {
-        display: initial;
     }
 
     header > h3 {
