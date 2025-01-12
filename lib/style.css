@@ -8,65 +8,43 @@
     --bracket--competitor-background: white;
     --bracket--competitor-color: black;
 
+    --bracket--competitor--loser-color: tomato;
     --bracket--competitor--loser-background: color-mix(
         in lch,
-        tomato,
+        var(--bracket--competitor--loser-color),
         var(--main-background) 90%
     );
-    --bracket--competitor--loser-color: color-mix(
-        in lch,
-        tomato,
-        white 15%
-    );
 
+    --bracket--competitor--winner-color: limegreen;
     --bracket--competitor--winner-background: color-mix(
         in lch,
-        seagreen,
+        var(--bracket--competitor--winner-color),
         var(--main-background) 90%
     );
-    --bracket--competitor--winner-color: color-mix(
-        in lch,
-        seagreen,
-        white 20%
-    );
 
-    --first-place-color: color-mix(
-        in lch,
-        darkgoldenrod,
-        gold 45%
-    );
-
-    --bracket--competitor--first-place-background: color-mix(
-        in lch,
-        var(--first-place-color),
-        var(--main-background) 90%
-    );
     --bracket--competitor--first-place-color: color-mix(
         in lch,
-        var(--first-place-color),
-        white 30%
+        gold,
+        darkgoldenrod 25%
+    );
+    --bracket--competitor--first-place-background: color-mix(
+        in lch,
+        var(--bracket--competitor--first-place-color),
+        var(--main-background) 90%
     );
 
     --bracket--competitor--second-place-background: color-mix(
         in lch,
-        lightsteelblue,
+        var(--bracket--competitor--second-place-color),
         var(--main-background) 90%
     );
-    --bracket--competitor--second-place-color: color-mix(
-        in lch,
-        lightsteelblue,
-        white 0%
-    );
+    --bracket--competitor--second-place-color: lightsteelblue;
 
+    --bracket--competitor--third-place-color: peru;
     --bracket--competitor--third-place-background: color-mix(
         in lch,
-        peru,
+        var(--bracket--competitor--third-place-color),
         var(--main-background) 90%
-    );
-    --bracket--competitor--third-place-color: color-mix(
-        in lch,
-        peru,
-        white 15%
     );
 }
 
