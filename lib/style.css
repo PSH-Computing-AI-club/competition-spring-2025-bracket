@@ -9,62 +9,62 @@
     --bracket--competitor-color: black;
 
     --bracket--competitor--loser-background: color-mix(
-        in hsl,
+        in lch,
         tomato,
-        var(--main-background) 80%
+        var(--main-background) 90%
     );
     --bracket--competitor--loser-color: color-mix(
-        in hsl,
+        in lch,
         tomato,
         white 15%
     );
 
     --bracket--competitor--winner-background: color-mix(
-        in hsl,
+        in lch,
         seagreen,
-        var(--main-background) 85%
+        var(--main-background) 90%
     );
     --bracket--competitor--winner-color: color-mix(
-        in hsl,
+        in lch,
         seagreen,
         white 20%
     );
 
     --first-place-color: color-mix(
-        in hsl,
+        in lch,
         darkgoldenrod,
         gold 45%
     );
 
     --bracket--competitor--first-place-background: color-mix(
-        in hsl,
+        in lch,
         var(--first-place-color),
-        var(--main-background) 80%
+        var(--main-background) 90%
     );
     --bracket--competitor--first-place-color: color-mix(
-        in hsl,
+        in lch,
         var(--first-place-color),
         white 30%
     );
 
     --bracket--competitor--second-place-background: color-mix(
-        in hsl,
+        in lch,
         lightsteelblue,
-        var(--main-background) 70%
+        var(--main-background) 90%
     );
     --bracket--competitor--second-place-color: color-mix(
-        in hsl,
+        in lch,
         lightsteelblue,
         white 0%
     );
 
     --bracket--competitor--third-place-background: color-mix(
-        in hsl,
+        in lch,
         peru,
-        var(--main-background) 80%
+        var(--main-background) 90%
     );
     --bracket--competitor--third-place-color: color-mix(
-        in hsl,
+        in lch,
         peru,
         white 15%
     );
@@ -212,7 +212,7 @@ header > h2 {
 
 .bracket--competitor:not([data-is-second-place])[data-is-loser]
     > .bracket--competitor-text {
-    color: color-mix(in hsl, currentColor, transparent 35%);
+    color: color-mix(in lch, currentColor, transparent 35%);
 
     text-decoration: line-through var(--bracket--competitor--loser-color);
 }
