@@ -33,12 +33,16 @@
         var(--main-background) 90%
     );
 
+    --bracket--competitor--second-place-color: color-mix(
+        in lch,
+        lightsteelblue,
+        silver 0%
+    );
     --bracket--competitor--second-place-background: color-mix(
         in lch,
         var(--bracket--competitor--second-place-color),
         var(--main-background) 90%
     );
-    --bracket--competitor--second-place-color: lightsteelblue;
 
     --bracket--competitor--third-place-color: color-mix(
         in lch,
