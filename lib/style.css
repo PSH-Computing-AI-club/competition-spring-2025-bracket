@@ -40,7 +40,11 @@
     );
     --bracket--competitor--second-place-color: lightsteelblue;
 
-    --bracket--competitor--third-place-color: peru;
+    --bracket--competitor--third-place-color: color-mix(
+        in lch,
+        peru,
+        white 10%
+    );
     --bracket--competitor--third-place-background: color-mix(
         in lch,
         var(--bracket--competitor--third-place-color),
