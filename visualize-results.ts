@@ -9,7 +9,7 @@ import {
     DIRECTORY_BRACKET_LOGS,
     DIRECTORY_MATCH_LOGS,
     DIRECTORY_WWW_OUTPUT,
-    FILE_WWW_LANDING_INDEX,
+    FILE_WWW_INDEX,
 } from './lib/www.ts';
 
 await Promise.all([
@@ -27,7 +27,7 @@ const runResults = JSON.parse(jsonPayload) as IRunResults;
 const view = BracketView({ runResults });
 const landingIndex = renderView(view);
 
-await Deno.writeTextFile(FILE_WWW_LANDING_INDEX, landingIndex);
+await Deno.writeTextFile(FILE_WWW_INDEX, landingIndex);
 
 await Promise.all([
     copyFileTo(FILE_RUN_LOG, DIRECTORY_BRACKET_LOGS),
