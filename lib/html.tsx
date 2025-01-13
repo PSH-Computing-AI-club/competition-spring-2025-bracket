@@ -26,6 +26,8 @@ interface IBracketCompetitorProps {
 
     readonly isSecondPlace?: boolean;
 
+    readonly isSupplementalBracket?: boolean;
+
     readonly isThirdPlace?: boolean;
 
     readonly isWinner?: boolean;
@@ -128,6 +130,7 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
         isCompetitorA,
         isFirstPlace,
         isSecondPlace,
+        isSupplementalBracket,
         isThirdPlace,
         isWinner,
     } = props;
@@ -136,7 +139,8 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
 
     if (isFirstPlace || isSecondPlace || isThirdPlace) {
         statusIcon = ICONS.Trophy;
-    } else if (isWinner) statusIcon = ICONS.Check;
+    } else if (isSupplementalBracket) statusIcon = ICONS.Swords;
+    else if (isWinner) statusIcon = ICONS.Check;
 
     return (
         <div
@@ -146,6 +150,9 @@ function BracketCompetitor(props: IBracketCompetitorProps) {
             data-is-loser={isWinner ? undefined : 'true'}
             data-is-first-place={isFirstPlace ? 'true' : undefined}
             data-is-second-place={isSecondPlace ? 'true' : undefined}
+            data-is-supplemental-bracket={isSupplementalBracket
+                ? 'true'
+                : undefined}
             data-is-third-place={isThirdPlace ? 'true' : undefined}
             data-is-winner={isWinner ? 'true' : undefined}
         >
@@ -215,6 +222,9 @@ export function BracketView(props: IBracketViewProps) {
     const firstPlaceName = nameLookup[firstPlace];
     const thirdPlaceName = nameLookup[thirdPlace];
 
+    const { competitorA: thirdPlaceA, competitorB: thirdPlaceB } =
+        thirdPlacePair;
+
     return (
         <Document
             title='Bracket'
@@ -246,6 +256,18 @@ export function BracketView(props: IBracketViewProps) {
                                     ? (secondPlace === competitorB)
                                     : undefined;
 
+                                const isASupplementalBracket = (roundIndex ===
+                                        rounds.length - 2)
+                                    ? (thirdPlaceA === competitorA ||
+                                        thirdPlaceB === competitorA)
+                                    : undefined;
+
+                                const isBSupplementalBracket = (roundIndex ===
+                                        rounds.length - 2)
+                                    ? (thirdPlaceB === competitorB ||
+                                        thirdPlaceA === competitorB)
+                                    : undefined;
+
                                 return (
                                     <>
                                         {pairIndex !== 0
@@ -255,6 +277,7 @@ export function BracketView(props: IBracketViewProps) {
                                         <BracketCompetitor
                                             competitor={nameA}
                                             isSecondPlace={isASecondPlace}
+                                            isSupplementalBracket={isASupplementalBracket}
                                             isWinner={winner ===
                                                 competitorA}
                                             isCompetitorA
@@ -265,6 +288,7 @@ export function BracketView(props: IBracketViewProps) {
                                         <BracketCompetitor
                                             competitor={nameB}
                                             isSecondPlace={isBSecondPlace}
+                                            isSupplementalBracket={isBSupplementalBracket}
                                             isWinner={winner ===
                                                 competitorB}
                                         />
