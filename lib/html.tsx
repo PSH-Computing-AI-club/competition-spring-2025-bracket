@@ -1,11 +1,12 @@
-import type { ComponentChildren } from 'preact';
+import type { ComponentChildren, JSX } from 'preact';
+import { render } from 'preact-render-to-string/jsx';
 
 import * as ICONS from './icons.tsx';
 import type { IRunResults } from './results.ts';
 
-const TEXT_STYLE = await Deno.readTextFile('./lib/style.css');
+const HEADER_DOCTYPE = '<!DOCTYPE html>\n';
 
-export const HEADER_DOCTYPE = '<!DOCTYPE html>\n';
+const TEXT_STYLE = await Deno.readTextFile('./lib/style.css');
 
 interface IDocumentProps {
     readonly children: ComponentChildren;
@@ -355,4 +356,10 @@ export function BracketView(props: IBracketViewProps) {
             </Bracket>
         </Document>
     );
+}
+
+export function renderView(view: JSX.Element): string {
+    const renderedComponent = render(view, {}, { pretty: true });
+
+    return HEADER_DOCTYPE + renderedComponent;
 }

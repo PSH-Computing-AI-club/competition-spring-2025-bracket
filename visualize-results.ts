@@ -1,6 +1,4 @@
-import { render } from 'preact-render-to-string/jsx';
-
-import { BracketView, HEADER_DOCTYPE } from './lib/html.tsx';
+import { BracketView, renderView } from './lib/html.tsx';
 import type { IRunResults } from './lib/results.ts';
 import {
     DIRECTORY_MATCH_LOGS as DIRECTORY_RUN_MATCH_LOGS,
@@ -27,7 +25,7 @@ const jsonPayload = await Deno.readTextFile(FILE_RUN_LOG);
 const runResults = JSON.parse(jsonPayload) as IRunResults;
 
 const view = BracketView({ runResults });
-const landingIndex = HEADER_DOCTYPE + render(view, {}, { pretty: true });
+const landingIndex = renderView(view);
 
 await Deno.writeTextFile(FILE_WWW_LANDING_INDEX, landingIndex);
 
