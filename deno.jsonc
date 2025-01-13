@@ -46,6 +46,7 @@
         "check:lint": "deno lint ./",
         "check:types": "deno check ./",
         "deps:cache": "deno cache ./.scripts/deps.ts",
-        "format": "deno fmt ./"
+        "format": "deno fmt ./",
+        "workflow:date-check": "deno run ./workflow-date-check.ts"
     }
 }
