@@ -13,7 +13,7 @@ const TEMPLATE_FILE_MATCH_LOG = (
     },
 ) => `round-${roundIndex + 1}.pair-${pairIndex + 1}.match-${
     matchIndex + 1
-}.json`;
+}.jsonl`;
 
 export interface IBracketMatch {
     readonly gridColumns: number;
