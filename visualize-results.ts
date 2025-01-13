@@ -2,14 +2,17 @@ import { render } from 'preact-render-to-string/jsx';
 
 import { BracketView, HEADER_DOCTYPE } from './lib/html.tsx';
 import type { IRunResults } from './lib/results.ts';
-import { FILE_RUN_LOG } from './lib/run.ts';
+import {
+    DIRECTORY_MATCH_LOGS as DIRECTORY_RUN_MATCH_LOGS,
+    FILE_RUN_LOG,
+} from './lib/run.ts';
 import {
     DIRECTORY_BRACKET_LOGS,
     DIRECTORY_MATCH_LOGS,
     DIRECTORY_WWW_OUTPUT,
     FILE_WWW_LANDING_INDEX,
 } from './lib/www.ts';
-import { copyFileTo } from './lib/util.ts';
+import { copyDirectoryFilesTo, copyFileTo } from './lib/util.ts';
 
 await Promise.all([
     DIRECTORY_WWW_OUTPUT,
@@ -28,4 +31,7 @@ const landingIndex = HEADER_DOCTYPE + render(view, {}, { pretty: true });
 
 await Deno.writeTextFile(FILE_WWW_LANDING_INDEX, landingIndex);
 
-await copyFileTo(FILE_RUN_LOG, DIRECTORY_BRACKET_LOGS);
+await Promise.all([
+    copyFileTo(FILE_RUN_LOG, DIRECTORY_BRACKET_LOGS),
+    copyDirectoryFilesTo(DIRECTORY_RUN_MATCH_LOGS, DIRECTORY_MATCH_LOGS),
+]);

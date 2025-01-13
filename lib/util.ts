@@ -39,6 +39,26 @@ export function copyFileTo(
     return Deno.copyFile(filePath, copyFilePath);
 }
 
+export async function copyDirectoryFilesTo(
+    fromDirectoryPath: string,
+    toDirectoryPath: string,
+): Promise<void> {
+    const filePaths = (await Array
+        .fromAsync(Deno.readDir(fromDirectoryPath)))
+        .filter(
+            (entry) => entry.isFile,
+        )
+        .map(
+            (entry) => join(fromDirectoryPath, entry.name),
+        );
+
+    await Promise.all(
+        filePaths.map(
+            (filePath) => copyFileTo(filePath, toDirectoryPath),
+        ),
+    );
+}
+
 export async function doesPathExist(path: string | URL): Promise<boolean> {
     try {
         await Deno.lstat(path);
