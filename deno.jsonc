@@ -39,9 +39,9 @@
 
     "tasks": {
         "check": "deno task check:format;deno task check:types;deno task check:lint",
-        "bracket:clone": "deno run --allow-read --allow-run --allow-write ./clone-repos.ts",
-        "bracket:run": "deno run --allow-read --allow-run --allow-write ./run-bracket.ts",
-        "bracket:visualize": "deno run --allow-read --allow-write ./visualize-results.ts",
+        "bracket:clone": "deno run --allow-read --allow-run --allow-write ./bracket-clone.ts",
+        "bracket:run": "deno run --allow-read --allow-run --allow-write ./bracket-run.ts",
+        "bracket:visualize": "deno run --allow-read --allow-write ./bracket-visualize.ts",
         "check:format": "deno fmt --check ./",
         "check:lint": "deno lint ./",
         "check:types": "deno check ./",
