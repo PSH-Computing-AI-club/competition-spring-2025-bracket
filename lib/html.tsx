@@ -5,6 +5,8 @@ import type { IRunResults } from './results.ts';
 
 const TEXT_STYLE = await Deno.readTextFile('./lib/style.css');
 
+export const HEADER_DOCTYPE = '<!DOCTYPE html>\n';
+
 interface IDocumentProps {
     readonly children: ComponentChildren;
 
