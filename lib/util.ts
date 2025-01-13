@@ -1,3 +1,5 @@
+import { basename, join } from '@std/path';
+
 export interface ICommandExecutionResults {
     readonly stderr: string;
 
@@ -25,6 +27,16 @@ export class CommandExecutionError extends Error {
         this.code = code;
         this.cause = stderr;
     }
+}
+
+export function copyFileTo(
+    filePath: string,
+    directoryPath: string,
+): Promise<void> {
+    const fileName = basename(filePath);
+    const copyFilePath = join(directoryPath, fileName);
+
+    return Deno.copyFile(filePath, copyFilePath);
 }
 
 export async function doesPathExist(path: string | URL): Promise<boolean> {

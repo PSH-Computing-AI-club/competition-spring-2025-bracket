@@ -9,6 +9,7 @@ import {
     DIRECTORY_WWW_OUTPUT,
     FILE_WWW_LANDING_INDEX,
 } from './lib/www.ts';
+import { copyFileTo } from './lib/util.ts';
 
 await Promise.all([
     DIRECTORY_WWW_OUTPUT,
@@ -26,3 +27,5 @@ const view = BracketView({ runResults });
 const landingIndex = HEADER_DOCTYPE + render(view, {}, { pretty: true });
 
 await Deno.writeTextFile(FILE_WWW_LANDING_INDEX, landingIndex);
+
+await copyFileTo(FILE_RUN_LOG, DIRECTORY_BRACKET_LOGS);
