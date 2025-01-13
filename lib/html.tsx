@@ -372,7 +372,7 @@ export function DirectoryView(props: IDirectoryViewProps) {
     );
 
     const fileEntries = entries.filter(
-        (entry) => entry.isFile,
+        (entry) => entry.isFile && entry.name !== 'index.html',
     );
 
     return (
