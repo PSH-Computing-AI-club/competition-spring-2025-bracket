@@ -4,13 +4,13 @@ import {
     DIRECTORY_MATCH_LOGS as DIRECTORY_RUN_MATCH_LOGS,
     FILE_RUN_LOG,
 } from './lib/run.ts';
+import { copyDirectoryFilesTo, copyFileTo } from './lib/util.ts';
 import {
     DIRECTORY_BRACKET_LOGS,
     DIRECTORY_MATCH_LOGS,
     DIRECTORY_WWW_OUTPUT,
     FILE_WWW_LANDING_INDEX,
 } from './lib/www.ts';
-import { copyDirectoryFilesTo, copyFileTo } from './lib/util.ts';
 
 await Promise.all([
     DIRECTORY_WWW_OUTPUT,
