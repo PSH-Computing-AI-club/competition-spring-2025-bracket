@@ -13,7 +13,6 @@ jobs:
     check-date:
         runs-on: ubuntu-22.04
 
-        continue-on-error: true
         outputs:
             status: ${{ steps.date-check.outcome == 'failure' && 'success' || 'cancelled' }}
 
@@ -28,6 +27,7 @@ jobs:
 
             - name: Is Practice Bracket Date Range
               id: date-check
+              continue-on-error: true
               run: deno task workflow:date-check $TIMEZONE $DATE_START $DATE_END
 
     run-bracket:
