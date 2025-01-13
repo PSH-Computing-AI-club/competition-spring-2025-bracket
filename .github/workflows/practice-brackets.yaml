@@ -15,7 +15,7 @@ jobs:
 
         continue-on-error: true
         outputs:
-            status: ${{ steps.date-check.outcome == "failure" && "success" || "cancelled" }}
+            status: ${{ steps.date-check.outcome == 'failure' && 'success' || 'cancelled' }}
 
         steps:
             - name: Clone Repository
