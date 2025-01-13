@@ -50,6 +50,12 @@ export interface IBracketViewProps {
     readonly runResults: IRunResults;
 }
 
+export interface IDirectoryViewProps {
+    readonly directory: string;
+
+    readonly entries: Deno.DirEntry[];
+}
+
 function Style() {
     return (
         <style
@@ -355,6 +361,70 @@ export function BracketView(props: IBracketViewProps) {
                 </BracketRound>
             </Bracket>
         </Document>
+    );
+}
+
+export function DirectoryView(props: IDirectoryViewProps) {
+    const { directory, entries } = props;
+
+    const directoryEntries = entries.filter(
+        (entry) => entry.isDirectory,
+    );
+
+    const fileEntries = entries.filter(
+        (entry) => entry.isFile,
+    );
+
+    return (
+        <html lang='en'>
+            <head>
+                <meta charset='UTF-8' />
+                <meta
+                    name='viewport'
+                    content='width=device-width, initial-scale=1.0'
+                />
+
+                <title>
+                    {directory} :: Directory Listing
+                </title>
+            </head>
+
+            <body>
+                <header>
+                    <h1>
+                        <code>{directory}/</code>
+                    </h1>
+                </header>
+
+                <main>
+                    <ul>
+                        {directoryEntries.map((entry) => {
+                            const { name } = entry;
+
+                            return (
+                                <li>
+                                    <a href={`./${name}`}>
+                                        <code>{entry.name}/</code>
+                                    </a>
+                                </li>
+                            );
+                        })}
+
+                        {fileEntries.map((entry) => {
+                            const { name } = entry;
+
+                            return (
+                                <li>
+                                    <a href={`./${name}`}>
+                                        <code>{entry.name}</code>
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </main>
+            </body>
+        </html>
     );
 }
 
