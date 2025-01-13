@@ -328,8 +328,10 @@ export function makeBracket(options: IBracketOptions): IBracket {
                 ? competitorB
                 : competitorA;
 
-            const [thirdPlaceCompetitorA, thirdPlaceCompetitorB] =
-                thirdPlaceLosers!;
+            const [thirdPlaceCompetitorA, thirdPlaceCompetitorB] = shuffle(
+                thirdPlaceLosers!,
+                { prng },
+            );
 
             const thirdPlacePair = await computePair(
                 thirdPlaceCompetitorA,
