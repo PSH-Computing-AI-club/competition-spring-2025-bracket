@@ -1,6 +1,6 @@
 import { join } from '@std/path';
 
-export const DIRECTORY_WWW_OUTPUT = join(`./dist/www`);
+export const DIRECTORY_WWW_OUTPUT = `./dist/www`;
 
 export const DIRECTORY_LOG_OUTPUT = join(DIRECTORY_WWW_OUTPUT, 'logs');
 
