@@ -12,7 +12,7 @@ const UNIX_EPOCH = Temporal.PlainDate.from({
     day: 1,
 });
 
-export const RUN_NUMBER = Math.floor(NOW.hour / HOURS_BETWEEN_RUNS);
+export const RUN_NUMBER = Math.floor(NOW.hour / HOURS_BETWEEN_RUNS) + 1;
 
 export const RUN_IDENTIFIER = `${NOW.year}-${
     NOW.month.toString().padStart(2, '0')
