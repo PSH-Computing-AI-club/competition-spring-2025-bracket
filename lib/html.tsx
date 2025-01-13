@@ -360,6 +360,24 @@ export function BracketView(props: IBracketViewProps) {
                     />
                 </BracketRound>
             </Bracket>
+
+            <h4>Supplemental Materials</h4>
+
+            <ul>
+                <li>
+                    <a
+                        href='https://github.com/PSH-Computing-AI-club/competition-spring-2025'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                    >
+                        Competition Overview
+                    </a>
+                </li>
+
+                <li>
+                    <a href='./logs' target='_blank'>Log Files</a>
+                </li>
+            </ul>
         </Document>
     );
 }
