@@ -1,0 +1,48 @@
+name: Practice Brackets
+
+on:
+    push:
+        branches: [main]
+
+env:
+    TIMEZONE: 'America/New_York'
+    DATE_START: '2024-01-01'
+    DATE_END: '2024-12-31'
+
+jobs:
+    check-date:
+        runs-on: ubuntu-22.04
+
+        continue-on-error: true
+        outputs:
+            status: ${{ steps.date-check.outcome == "failure" && "success" || "cancelled" }}
+
+        steps:
+            - name: Clone Repository
+              uses: actions/checkout@v4
+
+            - name: Configure Deno
+              uses: denoland/setup-deno@v2
+              with:
+                  deno-version: 2.1.4
+
+            - name: Is Practice Bracket Date Range
+              id: date-check
+              run: deno task workflow:date-check $TIMEZONE $DATE_START $DATE_END
+
+    run-bracket:
+        needs: check-date
+
+        runs-on: ubuntu-22.04
+
+        steps:
+            - name: Clone Repository
+              uses: actions/checkout@v4
+
+            - name: Configure Deno
+              uses: denoland/setup-deno@v2
+              with:
+                  deno-version: 2.1.4
+
+            - name: Test Echo
+              run: echo "Hello World!"
