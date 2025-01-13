@@ -10,7 +10,7 @@ interface IDocumentProps {
 
     readonly datetime: number;
 
-    readonly runNumber: number;
+    readonly runNumber?: number;
 
     readonly title: string;
 }
@@ -100,8 +100,15 @@ function Document(props: IDocumentProps) {
                     <h3>Spring '25</h3>
                     <h1>Blossoming Battlegrounds</h1>
                     <h2>
-                        {title} — <br />
-                        RUN {runNumber}, {formattedDate}
+                        {title}
+                        {runNumber !== undefined
+                            ? (
+                                <>
+                                    — <br />
+                                    RUN {runNumber}, {formattedDate}
+                                </>
+                            )
+                            : <></>}
                     </h2>
                 </header>
 
