@@ -12,7 +12,9 @@ import {
     DIRECTORY_LOG_OUTPUT,
     DIRECTORY_MATCH_LOGS,
     DIRECTORY_WWW_OUTPUT,
-    FILE_LOG_INDEX,
+    FILE_BRACKET_LOGS_INDEX,
+    FILE_LOGS_INDEX,
+    FILE_MATCH_LOGS_INDEX,
     FILE_WWW_INDEX,
 } from './lib/www.ts';
 
@@ -38,19 +40,41 @@ await Promise.all([
     copyDirectoryFilesTo(DIRECTORY_RUN_MATCH_LOGS, DIRECTORY_MATCH_LOGS),
 ]);
 
-const [logEntries] = await Promise.all([
+const [bracketEntries, logEntries, matchesEntries] = await Promise.all([
+    Array.fromAsync(
+        Deno.readDir(DIRECTORY_BRACKET_LOGS),
+    ),
+
     Array.fromAsync(
         Deno.readDir(DIRECTORY_LOG_OUTPUT),
     ),
+
+    Array.fromAsync(
+        Deno.readDir(DIRECTORY_MATCH_LOGS),
+    ),
 ]);
 
-const logsView = DirectoryView({
+const bracketLogsView = DirectoryView({
+    directory: basename(DIRECTORY_BRACKET_LOGS),
+    entries: bracketEntries,
+});
+
+const logsOutputView = DirectoryView({
     directory: basename(DIRECTORY_LOG_OUTPUT),
     entries: logEntries,
 });
 
-const logsIndex = renderView(logsView);
+const matchesLogsView = DirectoryView({
+    directory: basename(DIRECTORY_MATCH_LOGS),
+    entries: matchesEntries,
+});
+
+const bracketLogsIndex = renderView(bracketLogsView);
+const logsOutputIndex = renderView(logsOutputView);
+const matchesLogIndex = renderView(matchesLogsView);
 
 await Promise.all([
-    Deno.writeTextFile(FILE_LOG_INDEX, logsIndex),
+    Deno.writeTextFile(FILE_BRACKET_LOGS_INDEX, bracketLogsIndex),
+    Deno.writeTextFile(FILE_LOGS_INDEX, logsOutputIndex),
+    Deno.writeTextFile(FILE_MATCH_LOGS_INDEX, matchesLogIndex),
 ]);
