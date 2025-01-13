@@ -108,7 +108,7 @@ function Document(props: IDocumentProps) {
                         {runNumber !== undefined
                             ? (
                                 <>
-                                    — <br />
+                                    {' '}— <br />
                                     RUN {runNumber}, {formattedDate}
                                 </>
                             )
