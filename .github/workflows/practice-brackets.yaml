@@ -13,9 +13,6 @@ jobs:
     check-date:
         runs-on: ubuntu-22.04
 
-        outputs:
-            status: ${{ steps.date-check.outcome == 'failure' && 'cancelled' || 'success' }}
-
         steps:
             - name: Clone Repository
               uses: actions/checkout@v4
@@ -27,12 +24,10 @@ jobs:
 
             - name: Is Practice Bracket Date Range
               id: date-check
-              continue-on-error: true
               run: deno task workflow:date-check $TIMEZONE $DATE_START $DATE_END
 
     run-bracket:
         needs: check-date
-        if:
 
         runs-on: ubuntu-22.04
 
