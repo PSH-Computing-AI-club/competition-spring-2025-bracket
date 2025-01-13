@@ -44,6 +44,13 @@
         var(--main-background) 90%
     );
 
+    --bracket--competitor--supplemental-bracket-color: palevioletred;
+    --bracket--competitor--supplemental-bracket-background: color-mix(
+        in lch,
+        var(--bracket--competitor--supplemental-bracket-color),
+        var(--main-background) 90%
+    );
+
     --bracket--competitor--third-place-color: color-mix(
         in lch,
         peru,
@@ -235,6 +242,13 @@ header > h2 {
 .bracket--competitor[data-is-second-place] > .bracket--competitor-icon {
     background-color: var(--bracket--competitor--second-place-background);
     color: var(--bracket--competitor--second-place-color);
+}
+
+.bracket--competitor[data-is-supplemental-bracket] > .bracket--competitor-icon {
+    background-color: var(
+        --bracket--competitor--supplemental-bracket-background
+    );
+    color: var(--bracket--competitor--supplemental-bracket-color);
 }
 
 .bracket--competitor[data-is-third-place] > .bracket--competitor-icon {
