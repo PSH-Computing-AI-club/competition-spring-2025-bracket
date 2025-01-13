@@ -40,5 +40,11 @@ jobs:
               with:
                   deno-version: 2.1.4
 
-            - name: Test Echo
-              run: echo "Hello World!"
+            - name: Clone Competitor Repositories
+              run: deno task bracket:clone
+
+            - name: Run Bracket
+              run: deno task bracket:run
+
+            - name: Visualize Bracket
+              run: deno task bracket:visualize
