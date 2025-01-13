@@ -11,7 +11,7 @@ const TEMPLATE_FILE_MATCH_LOG = (
         pairIndex: number;
         roundIndex: number;
     },
-) => `round-${roundIndex + 1}.pair-${pairIndex + 1}.match-${
+) => `./round-${roundIndex + 1}.pair-${pairIndex + 1}.match-${
     matchIndex + 1
 }.jsonl`;
 
