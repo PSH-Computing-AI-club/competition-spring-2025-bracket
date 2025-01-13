@@ -1,5 +1,5 @@
-import { join } from '@std/path';
 import slug from 'slug';
+import { join } from '@std/path';
 
 import { doesPathExist } from './util.ts';
 
