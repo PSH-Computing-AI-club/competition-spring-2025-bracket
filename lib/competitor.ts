@@ -16,6 +16,8 @@ export interface ICompetitorData {
 }
 
 export interface ICompetitor {
+    readonly account: string;
+
     readonly cloneDirectory: string;
 
     readonly identifier: string;
@@ -23,6 +25,8 @@ export interface ICompetitor {
     readonly name: string;
 
     readonly playerFile: string;
+
+    readonly repository: string;
 
     readonly url: URL;
 }
@@ -37,6 +41,10 @@ export function transformCompetitorData(
 
                 const identifier = slug(name) as string;
                 const repositoryURL = new URL(url);
+
+                const [, account, repository] = repositoryURL
+                    .pathname
+                    .split('/');
 
                 const cloneDirectory = join(
                     DIRECTORY_COMPETITOR_REPOSITORIES,
@@ -58,10 +66,12 @@ export function transformCompetitorData(
                     : javascriptPlayerFile;
 
                 return {
+                    account,
                     cloneDirectory,
                     identifier,
                     name,
                     playerFile,
+                    repository,
                     url: repositoryURL,
                 };
             }),
