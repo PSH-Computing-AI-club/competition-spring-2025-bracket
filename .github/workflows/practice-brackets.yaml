@@ -30,6 +30,8 @@ jobs:
         needs: check-date
 
         runs-on: ubuntu-22.04
+        permissions:
+            contents: write
 
         steps:
             - name: Clone Repository
@@ -52,3 +54,26 @@ jobs:
 
             - name: Visualize Bracket
               run: deno task bracket:visualize
+
+            - name: Upload Visualization as Artifact
+              uses: actions/upload-pages-artifact@v3
+              id: documentation-artifact
+              with:
+                  path: ./dist/www
+
+    deploy-artifact:
+        needs: build-and-upload
+
+        runs-on: ubuntu-22.04
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+
+        permissions:
+            id-token: write
+            pages: write
+
+        steps:
+            - name: Deploy to GitHub Pages
+              uses: actions/deploy-pages@v4
+              id: documentation-artifact
