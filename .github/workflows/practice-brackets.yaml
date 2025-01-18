@@ -48,6 +48,10 @@ jobs:
                   wget --output-document ./.bin/dotsandboxes-linux https://github.com/PSH-Computing-AI-club/competition-spring-2025-dotsandboxes/releases/latest/download/dotsandboxes-linux
 
             - name: Clone Competitor Repositories
+              env:
+                  APP_ID: ${{ secrets.APP_ID }}
+                  APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+
               run: deno task bracket:clone
 
             - name: Run Bracket
