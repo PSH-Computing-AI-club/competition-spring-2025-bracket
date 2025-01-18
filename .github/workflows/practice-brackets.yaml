@@ -44,6 +44,7 @@ jobs:
 
             - name: Download Game Engine
               run: |
+                  mkdir ./.bin
                   wget --output-document ./.bin/dotsandboxes-linux https://github.com/PSH-Computing-AI-club/competition-spring-2025-dotsandboxes/releases/latest/download/dotsandboxes-linux
 
             - name: Clone Competitor Repositories
