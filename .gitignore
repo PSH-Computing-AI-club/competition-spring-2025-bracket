@@ -1,3 +1,4 @@
 /.bin
 /competitors
 /dist
+/*.dev.env
