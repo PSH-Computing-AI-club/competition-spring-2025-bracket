@@ -57,12 +57,12 @@ jobs:
 
             - name: Upload Visualization as Artifact
               uses: actions/upload-pages-artifact@v3
-              id: documentation-artifact
+              id: visualization-artifact
               with:
                   path: ./dist/www
 
     deploy-artifact:
-        needs: build-and-upload
+        needs: run-bracket
 
         runs-on: ubuntu-22.04
         environment:
@@ -76,4 +76,4 @@ jobs:
         steps:
             - name: Deploy to GitHub Pages
               uses: actions/deploy-pages@v4
-              id: documentation-artifact
+              id: visualization-artifact
