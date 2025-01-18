@@ -1,8 +1,10 @@
 name: Practice Brackets
 
 on:
-    push:
-        branches: [main]
+    schedule:
+        # Runs at 5:00 AM, 9:00 AM, 1:00 PM, 5:00 PM, 9:00 PM, and 1:00 AM UTC.
+        # Those times correspond to 12:00 AM, 4:00 AM, 8:00 AM, 12:00 PM, 4:00 PM, and 8:00 PM EST.
+        - cron: '0 5,9,13,17,21,1 * * *'
 
 env:
     TIMEZONE: 'America/New_York'
