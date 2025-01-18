@@ -1,5 +1,7 @@
 {
     "imports": {
+        "@octokit/app": "npm:@octokit/app@^15.1.2",
+        "@octokit/auth-app": "npm:@octokit/auth-app@^7.1.4",
         "@std/path": "jsr:@std/path@^1.0.8",
         "@std/random": "jsr:@std/random@^0.1.0",
         "preact": "npm:preact@^10.25.4",
