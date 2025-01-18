@@ -46,6 +46,7 @@ jobs:
               run: |
                   mkdir ./.bin
                   wget --output-document ./.bin/dotsandboxes-linux https://github.com/PSH-Computing-AI-club/competition-spring-2025-dotsandboxes/releases/latest/download/dotsandboxes-linux
+                  chmod +x ./.bin/dotsandboxes-linux
 
             - name: Clone Competitor Repositories
               env:
