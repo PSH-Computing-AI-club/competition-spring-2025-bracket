@@ -26,7 +26,7 @@ The manifest file is an array containing objects of each individual competitor. 
 [
     {
         "name": "Competitor Name Here",
-        "repository": "https://github.com/.../..."
+        "url": "https://github.com/.../..."
     },
 
     ...
