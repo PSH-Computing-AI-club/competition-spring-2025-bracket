@@ -44,6 +44,9 @@ jobs:
               with:
                   deno-version: 2.1.4
 
+            - name: Download Dependencies
+              run: deno task deps:cache
+
             - name: Download Game Engine
               run: |
                   mkdir ./.bin
