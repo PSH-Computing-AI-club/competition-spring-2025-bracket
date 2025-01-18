@@ -12,19 +12,19 @@ export const FILE_PLAYER_TYPESCRIPT = './mod.ts';
 export interface ICompetitorData {
     readonly name: string;
 
-    readonly repository: string;
+    readonly url: string;
 }
 
 export interface ICompetitor {
+    readonly cloneDirectory: string;
+
     readonly identifier: string;
 
     readonly name: string;
 
     readonly playerFile: string;
 
-    readonly repository: URL;
-
-    readonly repositoryDirectory: string;
+    readonly url: URL;
 }
 
 export function transformCompetitorData(
@@ -33,23 +33,23 @@ export function transformCompetitorData(
     return Promise.all(
         competitorManifest
             .map(async (competitor) => {
-                const { name, repository } = competitor;
+                const { name, url } = competitor;
 
                 const identifier = slug(name) as string;
-                const repositoryURL = new URL(repository);
+                const repositoryURL = new URL(url);
 
-                const repositoryDirectory = join(
+                const cloneDirectory = join(
                     DIRECTORY_COMPETITOR_REPOSITORIES,
                     identifier,
                 );
 
                 const javascriptPlayerFile = join(
-                    repositoryDirectory,
+                    cloneDirectory,
                     FILE_PLAYER_JAVASCRIPT,
                 );
 
                 const typescriptPlayerFile = join(
-                    repositoryDirectory,
+                    cloneDirectory,
                     FILE_PLAYER_TYPESCRIPT,
                 );
 
@@ -58,11 +58,11 @@ export function transformCompetitorData(
                     : javascriptPlayerFile;
 
                 return {
+                    cloneDirectory,
                     identifier,
                     name,
                     playerFile,
-                    repository: repositoryURL,
-                    repositoryDirectory,
+                    url: repositoryURL,
                 };
             }),
     );
