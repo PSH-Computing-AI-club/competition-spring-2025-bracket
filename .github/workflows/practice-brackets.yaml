@@ -2,9 +2,21 @@ name: Practice Brackets
 
 on:
     schedule:
-        # Runs every 4 hours, starting at 5:00 UTC.
-        # This timing corresponds to 12:00 AM, 4:00 AM, 8:00 AM, 12:00 PM, 4:00 PM, 8:00 PM EST.
-        - cron: '0 5/4 * * *'
+        # The practice bracket run script determines run seeds by eastern time.
+        # It then also determines the run number by breaking up a 24-hour day
+        # into chunks of four hour blocks. Each chunk of four hours is given
+        # a run number 1...6. So, we need to schedule 6 unique cronjobs for this
+        # workflow. That way we can saturate all 6 available run numbers.
+
+        # Runs every 4 hours, starting at 05:00 UTC.
+        # This timing corresponds to 3:00 AM, 7:00 AM, 11:00 AM, 3:00 PM.
+        - cron: '0 8/4 * * *'
+        # Runs at 00:00 UTC.
+        # This timing corresponds to 7:00 PM.
+        - cron: '0 0 * * *'
+        # Runs at 04:00 UTC.
+        # This timing corresponds to 11:00 PM.
+        - cron: '0 4 * * *'
 
 env:
     TIMEZONE: 'America/New_York'
