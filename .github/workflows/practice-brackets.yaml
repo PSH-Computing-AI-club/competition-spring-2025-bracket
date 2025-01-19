@@ -8,15 +8,15 @@ on:
         # a run number 1...6. So, we need to schedule 6 unique cronjobs for this
         # workflow. That way we can saturate all 6 available run numbers.
 
-        # Runs every 4 hours, starting at 05:00 UTC.
-        # This timing corresponds to 3:00 AM, 7:00 AM, 11:00 AM, 3:00 PM.
-        - cron: '0 8/4 * * *'
-        # Runs at 00:00 UTC.
-        # This timing corresponds to 7:00 PM.
-        - cron: '0 0 * * *'
-        # Runs at 04:00 UTC.
-        # This timing corresponds to 11:00 PM.
-        - cron: '0 4 * * *'
+        # Runs every 4 hours, starting at 05:25 UTC.
+        # This timing corresponds to 3:25 AM, 7:25 AM, 11:25 AM, 3:25 PM.
+        - cron: '25 8/4 * * *'
+        # Runs at 00:25 UTC.
+        # This timing corresponds to 7:25 PM.
+        - cron: '25 0 * * *'
+        # Runs at 04:25 UTC.
+        # This timing corresponds to 11:25 PM.
+        - cron: '25 4 * * *'
 
 env:
     TIMEZONE: 'America/New_York'
