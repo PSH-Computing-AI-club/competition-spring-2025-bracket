@@ -20,8 +20,8 @@ on:
 
 env:
     TIMEZONE: 'America/New_York'
-    DATE_START: '2030-01-01'
-    DATE_END: '2030-01-31'
+    DATE_START: '2025-02-02'
+    DATE_END: '2025-02-15'
 
 jobs:
     check-date:
