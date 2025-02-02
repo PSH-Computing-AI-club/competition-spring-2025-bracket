@@ -385,11 +385,18 @@ export function BracketView(props: IBracketViewProps) {
 export function DirectoryView(props: IDirectoryViewProps) {
     const { directory, entries } = props;
 
-    const directoryEntries = entries.filter(
+    const sortedEntries = entries.toSorted((entryA, entryB) => {
+        const nameA = entryA.name.toLowerCase();
+        const nameB = entryB.name.toLowerCase();
+
+        return nameA < nameB ? -1 : 0;
+    });
+
+    const directoryEntries = sortedEntries.filter(
         (entry) => entry.isDirectory,
     );
 
-    const fileEntries = entries.filter(
+    const fileEntries = sortedEntries.filter(
         (entry) => entry.isFile && entry.name !== 'index.html',
     );
 
