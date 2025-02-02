@@ -238,7 +238,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
                 suddenDeathMatches++;
             }
 
-            if (suddenDeathMatches === suddenDeathMax) {
+            if (winner === null && suddenDeathMatches === suddenDeathMax) {
                 winner = prng() < 0.5 ? competitorA : competitorB;
             }
         }
