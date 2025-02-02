@@ -192,6 +192,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
             );
 
             matches.push(match);
+            matchIndex++;
 
             switch (match.winner) {
                 case competitorA:
@@ -206,8 +207,6 @@ export function makeBracket(options: IBracketOptions): IBracket {
                     bWins++;
                     break;
             }
-
-            matchIndex++;
         }
 
         let winner: ICompetitor | null = null;
@@ -218,8 +217,6 @@ export function makeBracket(options: IBracketOptions): IBracket {
             let suddenDeathMatches = 0;
 
             while (suddenDeathMatches < suddenDeathMax) {
-                matchIndex++;
-
                 const match = await computeMatch(
                     competitorA,
                     competitorB,
@@ -229,6 +226,7 @@ export function makeBracket(options: IBracketOptions): IBracket {
                 );
 
                 matches.push(match);
+                matchIndex++;
 
                 if (match.winner) {
                     ({ winner } = match);
