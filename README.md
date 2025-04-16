@@ -65,6 +65,26 @@ During the practice tournament brackets timeframe, Bracket Runner will automatic
 
 The HTML visualized results will automatically be published to [GitHub Pages](https://psh-computing-ai-club.github.io/competition-spring-2025-bracket) after every run.
 
+## Automated Tournament GitHub Actions
+
+Automated tournament brackets are ran through the [`./.github/workflows/practice-brackets.yaml`](./.github/workflows/practice-brackets.yaml) file. A couple of things need to be configured / enabled for the automated system to work.
+
+### Enabling of GitHub Actions
+
+1. GitHub Actions needs to be enabled for the repository.
+
+2. Go to the "Settings" tab of the repository:
+
+![](./.assets/github-actions.enable.1.png)
+
+3. Then switch to the "Actions" menu:
+
+![](./.assets/github-actions.enable.2.png)
+
+4. Finally enable "Allow all actions and reusable workflows" and hit the "Save" button.
+
+![alt text](./.assets/github-actions.enable.3.png)
+
 ## License
 
 The Bracket Runner game engine is [licensed](./LICENSE) under the MIT License.
