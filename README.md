@@ -152,7 +152,8 @@ You can change the date range of when the practice brackets are allowed to run v
 ```yaml
 # Below is the date range the workflow was originally configured with.
 
-# NOTE: The date range is checked _inclusively_. Meaning the workflow will be allowed to run starting `DATE_START` midnight and end at `DATE_END` midnight.
+# NOTE: The date range is checked _inclusively_. Meaning the workflow will be
+# allowed to run starting `DATE_START` midnight and end at `DATE_END` midnight.
 
 env:
     TIMEZONE: 'America/New_York'
