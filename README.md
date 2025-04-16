@@ -115,6 +115,51 @@ The automated tournament workflow needs to be given permissions to access compet
 
 7. Repeat as new competitors sign up for the tournament.
 
+### Scheduling the Practice Brackets Timing
+
+The automated practice brackets are scheduled via [`schedule`](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) event.
+
+You can change the timing of when the practice brackets are ran via the [`./.github/workflows/practice-brackets.yaml`](./.github/workflows/practice-brackets.yaml) GitHub Actions workflow file at the top `on` section:
+
+```yaml
+# Below is the timing the workflow was originally configured with.
+
+on:
+    schedule:
+        # The practice bracket run script determines run seeds by eastern time.
+        # It then also determines the run number by breaking up a 24-hour day
+        # into chunks of four hour blocks. Each chunk of four hours is given
+        # a run number 1...6. So, we need to schedule 6 unique cronjobs for this
+        # workflow. That way we can saturate all 6 available run numbers.
+
+        # Runs every 4 hours, starting at 05:25 UTC.
+        # This timing corresponds to 3:25 AM, 7:25 AM, 11:25 AM, 3:25 PM.
+        - cron: '25 8/4 * * *'
+        # Runs at 00:25 UTC.
+        # This timing corresponds to 7:25 PM.
+        - cron: '25 0 * * *'
+        # Runs at 04:25 UTC.
+        # This timing corresponds to 11:25 PM.
+        - cron: '25 4 * * *'
+```
+
+### Scheduling the Practice Bracket Date Ranges
+
+The automated practice brackets only run in the configured date range. Before and after the date range the GitHub Actions workflow will just spin its wheels. Effectively, preventing it from running and failing each time.
+
+You can change the date range of when the practice brackets are allowed to run via the [`./.github/workflows/practice-brackets.yaml`](./.github/workflows/practice-brackets.yaml) GitHub Actions workflow file at the top `env` section:
+
+```yaml
+# Below is the date range the workflow was originally configured with.
+
+# NOTE: The date range is checked _inclusively_. Meaning the workflow will be allowed to run starting `DATE_START` midnight and end at `DATE_END` midnight.
+
+env:
+    TIMEZONE: 'America/New_York'
+    DATE_START: '2025-02-02'
+    DATE_END: '2025-02-22'
+```
+
 ## License
 
 The Bracket Runner game engine is [licensed](./LICENSE) under the MIT License.
