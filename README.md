@@ -65,55 +65,55 @@ During the practice tournament brackets timeframe, Bracket Runner will automatic
 
 The HTML visualized results will automatically be published to [GitHub Pages](https://psh-computing-ai-club.github.io/competition-spring-2025-bracket) after every run.
 
-## Automated Tournament GitHub Actions
+## Automated Tournament Practice Brackets via GitHub Actions
 
-Automated tournament brackets are ran through the [`./.github/workflows/practice-brackets.yaml`](./.github/workflows/practice-brackets.yaml) file. A couple of things need to be configured / enabled for the automated system to work.
+Automated tournament brackets are ran through the [`./.github/workflows/practice-brackets.yaml`](./.github/workflows/practice-brackets.yaml) file. Several things need to be configured / enabled for the automated system to work.
 
-### Enabling of GitHub Actions
+### Enabling GitHub Actions for the Repository
 
-1. GitHub Actions needs to be enabled for the repository.
+GitHub Actions needs to be enabled for the repository.
 
-2. Go to the "Settings" tab of the repository:
+1. Go to the "Settings" tab of the repository:
 
 ![](./.assets/github-actions.enable.1.png)
 
-3. Then switch to the "Actions" menu:
+2. Then switch to the "Actions" menu:
 
 ![](./.assets/github-actions.enable.2.png)
 
-4. Finally enable "Allow all actions and reusable workflows" and hit the "Save" button:
+3. Finally enable "Allow all actions and reusable workflows" and hit the "Save" button:
 
 ![](./.assets/github-actions.enable.3.png)
 
 ### Giving Permission to Competitor Repositories
 
-1. The automated tournament workflow needs to be given permissions to access competitor repositories found in the manifest.
+The automated tournament workflow needs to be given permissions to access competitor repositories found in the manifest.
 
-2. Go to the club's organization page and hit the "Settings" tab:
+1. Go to the club's organization page and hit the "Settings" tab:
 
 ![](./.assets/github-actions.permissions.1.png)
 
-3. Then switch to the "GitHub Apps" menu:
+2. Then switch to the "GitHub Apps" menu:
 
 ![](./.assets/github-actions.permissions.2.png)
 
-4. Hit the "Edit" button for the "competition-spring-2025-access" GitHub App:
+3. Hit the "Edit" button for the "competition-spring-2025-access" GitHub App:
 
 ![](./.assets/github-actions.permissions.3.png)
 
-5. Then switch to the "Install App" sub menu:
+4. Then switch to the "Install App" sub menu:
 
 ![](./.assets/github-actions.permissions.4.png)
 
-6. Hit the cog icon to go to the list of repositories installed with the GitHub App:
+5. Hit the cog icon to go to the list of repositories installed with the GitHub App:
 
 ![](./.assets/github-actions.permissions.5.png)
 
-7. Select the repositories of the competitors that are registered in the [`./competitors.json`](./competitors.json) manifest file.
+6. Select the repositories of the competitors that are registered in the [`./competitors.json`](./competitors.json) manifest file.
 
 ![](./.assets/github-actions.permissions.6.png)
 
-8. Repeat as new competitors sign up for the tournament.
+7. Repeat as new competitors sign up for the tournament.
 
 ## License
 
